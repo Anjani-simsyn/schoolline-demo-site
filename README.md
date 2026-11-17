@@ -1,22 +1,27 @@
-# SchoolLine Demo Hub
+# SchoolLine AI · Connected Learning Communities
 
-Single-page website for the SIPL x Uniconnect AI Hackathon 2026 finale (Team Data Dragons).
-Covers the problem, build status, the 10-minute demo plan, marketing and target customers, and judge Q&A.
+Website for the SIPL x Uniconnect AI Hackathon 2026 finale (Team Data Dragons).
+
+- `index.html` is the judge-facing page: problem, solution, the 10-minute live demo, build status, the full solution blueprint (data model, roles and access, channels, AI agents, 24 workflows, campaigns, integrations, dashboards), build plan, go-to-market and FAQ.
+- `runbook.html` is for the team only (run sheet, fallbacks, who plays whom, pre-show checklist). It is not linked from `index.html`.
+- `styles.css` is shared by both pages.
 
 ## Run locally
 
-Open `index.html` in a browser. No build step. Fonts load from Google Fonts.
+No build step. Serve the folder and open http://localhost:8000:
 
-Or serve the folder:
+    python -m http.server 8000
 
-    npx serve .
+Blueprint tabs can be linked directly, e.g. `index.html#p-wf` (workflows), `#p-access`, `#p-agents`.
 
 ## Edit
 
-- Build status cards: the `ITEMS` array near the bottom of `index.html` (`s` is built, testing, planned or poc).
-- Demo scenes: the `SCENES` array.
-- Pre-show checklist: the `CHECKS` array.
-- Judge questions: the `QA` array.
-- Colours: the `:root` tokens at the top of the `<style>` block (navy `#0D2235`, yellow `#F6C451`).
+All in the `<script>` block at the bottom of `index.html`:
 
-Published copy: https://claude.ai/artifact/7XGBxb8n3doVFLPjWnjZQY
+- Build status cards: `ITEMS` (`s` is `live`, `testing`, `build` or `roadmap`).
+- Demo scenes: `SCENES`.
+- CRM modules and fields: `MODULES`. Permission matrix: `MATRIX`.
+- WhatsApp templates: `TEMPLATES`. AI agents: `AGENTS`. Workflows: `WF`.
+- FAQ: `QA`.
+- Pre-show checklist: `CHECKS` in `runbook.html`.
+- Colours: the `:root` tokens at the top of `styles.css` (navy `#0B1E30`, yellow `#F6C451`).

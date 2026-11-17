@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>SchoolLine Demo Runbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav class="top" aria-label="Sections"><div class="in">
+  <a class="logo" href="index.html"><i aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D2235" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c5 0 9 3.4 9 7.6S17 18.2 12 18.2c-1 0-2-.1-2.9-.4L4.5 20l1.2-3.6C4 15.2 3 13 3 10.6 3 6.4 7 3 12 3z"/></svg></i>SchoolLine <b>AI</b></a>
+  <a class="l" href="#runsheet">Run sheet</a>
+  <a class="l" href="#fallbacks">Fallbacks</a>
+  <a class="l" href="#roles">Roles</a>
+  <a class="l" href="#checklist">Pre-show checklist</a>
+  <span class="pw">Team only · not for judges</span>
+</div></nav>
+
+<main class="wrap">
+<header style="padding-top:48px" class="sec-head">
+  <span class="eyebrow">Team Data Dragons · finale 17 Nov 2026</span>
+  <h1 style="font-size:clamp(2.2rem,5vw,3.4rem)">Demo <em>runbook</em></h1>
+  <p class="lede">Stage-side notes for the team. The judge-facing page is <a href="index.html">index.html</a>; this page is not linked from it.</p>
+</header>
+
+<section class="block" id="runsheet" style="padding-top:40px">
+  <div class="sec-head"><span class="eyebrow">Run sheet</span><h2>Ten minutes, cue by cue</h2></div>
+  <div class="tw"><table>
+    <thead><tr><th>Time</th><th>Scene</th><th>Action</th><th>Main screen</th></tr></thead>
+    <tbody>
+      <tr><td class="nw">0:00</td><td>Opening video</td><td>Play the video; it ends on "Send"</td><td>Video</td></tr>
+      <tr><td class="nw">1:00</td><td>1 · WhatsApp enquiry</td><td>Phone A sends the ad text; ask the safety question</td><td>Phone A mirror + Inbox + new Enquiry</td></tr>
+      <tr><td class="nw">2:30</td><td>2 · 9 PM hotline</td><td>Phone A calls the hotline; AI answers and books the visit; show summary + WhatsApp confirmation; optional whisper beat</td><td>Live call panel → Enquiry</td></tr>
+      <tr><td class="nw">4:30</td><td>3 · Documents</td><td>Send 3 photos, then the 4th</td><td>Enquiry documents</td></tr>
+      <tr><td class="nw">5:30</td><td>4 · Offer and payment</td><td>Set stage Offer sent; fire <code>run-payment-followup</code>; AI call rings Phone A; pay with the test card</td><td>Phone A + Enquiry + Fees</td></tr>
+      <tr><td class="nw">6:45</td><td>5 · Enrolment</td><td>Show the Guardian + Student created; welcome message on Phone A</td><td>Student record</td></tr>
+      <tr><td class="nw">7:30</td><td>6 · A late morning</td><td>Fire <code>run-arrival-check</code> stage 1; reply "2 …"; ask "Has she reached?"; scan the QR; then the judge-phone escalation</td><td>Morning Safety Board + Phone A</td></tr>
+      <tr><td class="nw">9:15</td><td>7 · Through the term</td><td>Fire <code>release-results</code>; create a Concern; show a meeting summary</td><td>Phone A</td></tr>
+      <tr><td class="nw">10:00</td><td>8 · Principal + close</td><td>Dashboards; closing video</td><td>Dashboards → video</td></tr>
+    </tbody></table></div>
+  <div class="grid" style="margin-top:14px">
+    <div class="card"><span class="k">Short on time</span><h3>The 6-minute version</h3><p>Show one document instead of four. Skip the whisper beat and the judge-phone escalation. Show the through-term scene as one slide.</p></div>
+    <div class="card"><span class="k">If something fails</span><h3>Never debug on stage</h3><p>Play the backup recording of that scene and move on. Every live scene is screen-recorded at the dress rehearsal.</p></div>
+    <div class="card"><span class="k">WhatsApp window</span><h3>Text only reaches recent chats</h3><p>Free-text replies only reach numbers that messaged the business number in the last 24 hours. Have Phone A and the judge phone message it before the show.</p></div>
+  </div>
+</section>
+
+<section class="block" id="fallbacks" style="padding-top:64px">
+  <div class="sec-head"><span class="eyebrow">Fallbacks</span><h2>If a scene breaks</h2></div>
+  <div class="tw"><table>
+    <thead><tr><th>Scene</th><th>Fallback</th></tr></thead>
+    <tbody>
+      <tr><td>Opening video</td><td>Video is saved on the presentation laptop.</td></tr>
+      <tr><td>1 · WhatsApp enquiry</td><td>Show the recording of this scene, then open the enquiry.</td></tr>
+      <tr><td>2 · 9 PM hotline</td><td>Play the recorded call and show the summary on the enquiry.</td></tr>
+      <tr><td>3 · Documents</td><td>In the 6-minute version send one document only.</td></tr>
+      <tr><td>4 · Offer and payment</td><td>Test card 4242 4242 4242 4242. If checkout is slow, switch to the bank-slip route.</td></tr>
+      <tr><td>5 · Enrolment</td><td>Show the Student record created earlier in rehearsal.</td></tr>
+      <tr><td>6 · A late morning</td><td>Skip the judge-phone escalation in the short version. Fire the late-scan test call from Postman if the gate form fails.</td></tr>
+      <tr><td>7 · Through the term</td><td>Show as one slide in the 6-minute version.</td></tr>
+      <tr><td>8 · Principal + close</td><td>If dashboards do not update live, use screenshots.</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="block" id="roles" style="padding-top:64px">
+  <div class="sec-head"><span class="eyebrow">Roles on the day</span><h2>Who plays whom</h2></div>
+  <div class="tw"><table>
+    <thead><tr><th>Owner</th><th>Plays</th><th>Responsible for</th></tr></thead>
+    <tbody>
+      <tr><td>Thilina (lead)</td><td>Presenter / Principal</td><td>Story, dashboards, timing</td></tr>
+      <tr><td>CRM owner</td><td>Accounts Officer</td><td>Records on screen, payment confirmation</td></tr>
+      <tr><td>Workflow owner</td><td>Operator</td><td>Fires the demo webhooks on cue</td></tr>
+      <tr><td>Telephony owner</td><td>Admissions Officer / Duty Teacher</td><td>Hotline, AI calls, transfer</td></tr>
+      <tr><td>Channels owner</td><td>Kumari on Phone A</td><td>All parent messages and calls</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="block" id="checklist" style="padding-top:64px">
+  <div class="sec-head"><span class="eyebrow">Before we go on stage</span><h2>Pre-show checklist</h2><p class="lede">Ticks are saved in this browser only.</p></div>
+  <div class="card">
+    <div class="prog" id="prog">0 of 0 done</div><div class="bar"><i id="bar"></i></div>
+    <div id="checks"></div>
+    <button class="chip" type="button" id="reset" style="margin-top:14px;width:fit-content">Clear all ticks</button>
+  </div>
+</section>
+</main>
+
+<footer class="cta" style="margin-top:80px"><div class="in"><p>Team Data Dragons · SIPL × Uniconnect AI Hackathon 2026</p></div></footer>
+
+<script>
+var CHECKS = [
+ "Site health check 30 minutes before the slot.",
+ "WhatsApp Chat Agent answers a test message. Re-check its AI model setting.",
+ "Phone A and the judge phone have messaged the business number in the last 24 hours.",
+ "The assistant recognises a guardian by mobile and answers about their child only.",
+ "The assistant can read today's attendance for \"Has she reached yet?\"",
+ "Hotline test call reaches the AI when nobody is in the Admissions queue.",
+ "The call summary is saved on the enquiry and the visit confirmation arrives.",
+ "Create a fresh demo fee. Pay link arrives; test-card payment marks it Paid.",
+ "Offer → payment webhook → Payment confirmed → enrolment creates guardian + student.",
+ "Gate webhook returns OK for an on-time and a late scan; message in under 30 seconds.",
+ "Message Reader handles Sinhala, Tamil and Singlish replies.",
+ "AI transfer to the Duty Teachers ring group works (or drop it from the script).",
+ "A teacher login sees only their class (Group / Own access).",
+ "Remove old test fees and test enquiries. Reset today's attendance.",
+ "Replace sample fee figures, or tell the judges they are samples.",
+ "Browser tabs open: Inbox, Enquiry, Student, Fees, Safety Board, dashboards.",
+ "Dashboards update live during a rehearsal.",
+ "Backup recording of every live scene is on the presentation laptop."
+];
+var done = {};
+try { done = JSON.parse(localStorage.getItem("sl-runbook-checks") || "{}") || {}; } catch(e) { done = {}; }
+function save(){ try { localStorage.setItem("sl-runbook-checks", JSON.stringify(done)); } catch(e) {} }
+function render(){
+  document.getElementById("checks").innerHTML = CHECKS.map(function(c,i){
+    return '<label class="check"><input type="checkbox" data-i="'+i+'"'+(done[i]?' checked':'')+'><span>'+c+'</span></label>';
+  }).join("");
+  progress();
+}
+function progress(){
+  var n = CHECKS.filter(function(_,i){return done[i]}).length;
+  document.getElementById("prog").textContent = n+" of "+CHECKS.length+" done";
+  document.getElementById("bar").style.width = (n/CHECKS.length*100)+"%";
+}
+document.getElementById("checks").addEventListener("change", function(e){
+  var i = e.target.dataset.i; if(i===undefined) return; done[i] = e.target.checked; save(); progress();
+});
+document.getElementById("reset").addEventListener("click", function(){ done = {}; save(); render(); });
+render();
+</script>
+</body>
+</html>

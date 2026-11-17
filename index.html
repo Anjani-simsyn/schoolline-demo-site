@@ -3,327 +3,450 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>SchoolLine Demo Hub</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
-<style>
-/* Look: matches the SchoolLine AI leaflet. Deep navy ground, warm yellow as the single accent, off-white type, cream chat panel.
-   One committed dark theme by design. Layout: sticky nav > hero with phone mock > Problem > Solution > Built so far > Demo plan > Marketing > Q&A > yellow CTA band. */
-:root{
-  --bg:#0D2235; --surface:#112B43; --surface2:#16334F; --fg:#F8F6F0; --muted:#B9C5D1; --line:#2A4058;
-  --accent:#F6C451; --accent-ink:#0D2235; --accent-soft:rgba(246,196,81,.14);
-  --plan:#9FB3C6; --plan-soft:#1A3550; --poc:#DCE6F0; --poc-soft:rgba(220,230,240,.1);
-  --cream:#F2EDE9; --ink:#0D2235; --rim:#07131F;
-  --display:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif; --body:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif; --mono:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;
-  color-scheme:dark;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 0}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
-h1,h2,h3{font-family:var(--display);line-height:1.1;text-wrap:balance;margin:0}
-h1{font-size:clamp(2.4rem,6.4vw,4.2rem);font-weight:800;letter-spacing:-.03em}
-h2{font-size:clamp(1.7rem,3.8vw,2.5rem);font-weight:800;letter-spacing:-.025em}
-h3{font-size:1.08rem;font-weight:700;letter-spacing:-.01em}
-h1 em,h2 em{font-style:normal;color:var(--accent)}
-p{margin:0}
-a{color:var(--accent)}
-.wrap{max-width:1100px;margin-inline:auto}
-.eyebrow{display:flex;align-items:center;gap:12px;font-size:.78rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:var(--accent)}
-.eyebrow::before{content:"";width:32px;height:2px;background:var(--accent);flex:none}
-.lede{font-size:1.1rem;color:var(--muted);max-width:62ch}
-section{padding-block:68px 8px}
-.sec-head{display:flex;flex-direction:column;gap:14px;margin-bottom:28px}
-
-/* brand mark */
-.logo{display:inline-flex;align-items:center;gap:12px;font-weight:800;font-size:1.25rem;letter-spacing:-.02em;white-space:nowrap;color:var(--fg);text-decoration:none}
-.logo i{width:38px;height:38px;border-radius:11px;background:var(--accent);display:grid;place-items:center;flex:none}
-.logo b{color:var(--accent);font-weight:800}
-
-/* nav */
-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)))}
-nav .in{max-width:1100px;margin-inline:auto;display:flex;gap:2px;overflow-x:auto;padding:10px max(16px,env(safe-area-inset-left,0px));align-items:center}
-nav .logo{margin-right:14px;font-size:1.05rem}
-nav .logo i{width:30px;height:30px;border-radius:9px}
-nav a.l{white-space:nowrap;text-decoration:none;color:var(--muted);font-size:.9rem;font-weight:500;padding:7px 12px;border-radius:99px}
-nav a.l:hover,nav a.l:focus-visible{background:var(--surface2);color:var(--fg);outline:none}
-nav .pw{margin-left:auto;white-space:nowrap;font-size:.85rem;color:var(--muted);padding-left:14px}
-nav .pw b{color:var(--fg);font-weight:800;letter-spacing:-.02em}
-
-/* hero */
-.hero{padding-block:56px 12px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:36px;align-items:center}
-@media (max-width:900px){.hero{grid-template-columns:1fr}}
-.hero-text{display:flex;flex-direction:column;gap:24px}
-.hero .lede{font-size:1.2rem;color:var(--muted)}
-.hero .sub-tag{font-weight:600;color:var(--fg)}
-.facts{display:flex;flex-wrap:wrap;gap:14px 30px;border-top:1px solid var(--line);padding-top:20px}
-.facts div{display:flex;flex-direction:column}
-.facts b{font-size:1.8rem;line-height:1;font-weight:800;color:var(--accent)}
-.facts span{font-size:.82rem;color:var(--muted);max-width:15ch;margin-top:4px}
-.challenge{border:1px solid var(--line);border-radius:16px;padding:16px 18px;max-width:64ch;background:var(--surface)}
-.challenge .eyebrow{margin-bottom:8px;font-size:.7rem}
-
-/* phone mock (same chat as the leaflet) */
-.phone-wrap{position:relative;display:grid;place-items:center;padding:12px 0 56px}
-.phone-wrap::before{content:"";position:absolute;width:76%;aspect-ratio:1;border-radius:50%;background:var(--accent);right:-8%;top:18%;opacity:.95}
-.phone{position:relative;width:min(100%,330px);background:var(--rim);border-radius:38px;padding:10px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
-.phone .scr{border-radius:30px;overflow:hidden;background:var(--cream)}
-.ph-head{background:var(--bg);display:flex;align-items:center;gap:10px;padding:14px 14px}
-.ph-head .av{width:36px;height:36px;border-radius:50%;background:var(--accent);display:grid;place-items:center;flex:none}
-.ph-head b{display:block;font-size:.92rem;line-height:1.2}
-.ph-head span{font-size:.78rem;color:var(--accent)}
-.chat{padding:14px 12px 44px;display:flex;flex-direction:column;gap:9px;color:var(--ink);font-size:.86rem;line-height:1.35}
-.chat .day{align-self:center;background:#fff;border-radius:8px;padding:3px 12px;font-size:.76rem;color:#5a6672}
-.bub{border-radius:14px;padding:10px 12px;max-width:92%;background:#fff}
-.bub.out{background:var(--accent);align-self:flex-end;font-weight:500}
-.bub.dark{background:var(--bg);color:var(--fg);font-weight:700;display:flex;gap:8px;align-items:flex-start}
-.bub.dark svg{flex:none;margin-top:2px}
-.lead-card{position:absolute;left:-6%;right:-4%;bottom:0;background:#FBF9F4;color:var(--ink);border-radius:16px;padding:12px 14px;display:flex;gap:12px;align-items:center;box-shadow:0 12px 30px rgba(0,0,0,.35)}
-.lead-card .ic{width:40px;height:40px;border-radius:50%;background:var(--bg);display:grid;place-items:center;flex:none}
-.lead-card b{display:block;font-size:.88rem;line-height:1.25}
-.lead-card span{font-size:.8rem;color:#4d5b68}
-@media (max-width:900px){.lead-card{left:0;right:0}.phone-wrap::before{right:-2%}}
-
-/* pipeline strip (from the leaflet) */
-.pipe{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:6px}
-.pipe span{border:1px solid var(--line);border-radius:14px;padding:12px 16px;font-weight:700;text-align:center;font-size:.95rem}
-.pipe span.last{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.pipe i{font-style:normal;color:var(--accent);font-weight:800}
-
-/* grids + cards */
-.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:9px;min-width:0}
-.card p{color:var(--muted);font-size:.95rem}
-.card .k{font-size:.72rem;font-weight:700;color:var(--accent);letter-spacing:.14em;text-transform:uppercase}
-.card ul{color:var(--muted)}
-
-/* journeys table */
-.tw{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
-table{border-collapse:collapse;width:100%;min-width:680px;font-size:.93rem}
-th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--accent);background:var(--surface2)}
-td{color:var(--muted)}
-tr:last-child td{border-bottom:0}
-td:first-child{font-weight:700;white-space:nowrap;color:var(--fg)}
-
-/* flow */
-.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:stretch}
-.flow .col{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;min-width:0}
-.flow .col h3{font-size:.72rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);font-weight:700;margin-bottom:12px}
-.flow .col.core{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.flow .col.core h3{color:var(--accent-ink);opacity:.75}
-.flow ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px;font-size:.94rem}
-.flow .arrow{align-self:center;color:var(--accent);font-size:1.6rem;font-weight:800}
-@media (max-width:760px){.flow{grid-template-columns:1fr}.flow .arrow{transform:rotate(90deg);justify-self:center}}
-
-/* status board */
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
-.chip{font:inherit;font-size:.88rem;font-weight:600;border:1px solid var(--line);background:transparent;color:var(--fg);padding:8px 16px;border-radius:99px;cursor:pointer}
-.chip:hover{border-color:var(--accent)}
-.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.chip:focus-visible,.scene-btn:focus-visible,summary:focus-visible,.check input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.status-list{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
-.item{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:9px;min-width:0}
-.item .top{display:flex;justify-content:space-between;gap:10px;align-items:center}
-.item .area{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
-.item p{color:var(--muted);font-size:.92rem}
-.badge{font-size:.7rem;font-weight:700;padding:4px 10px;border-radius:99px;white-space:nowrap;letter-spacing:.02em}
-.b-built{background:var(--accent);color:var(--accent-ink)}
-.b-testing{background:var(--accent-soft);color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
-.b-planned{background:var(--plan-soft);color:var(--plan)}
-.b-poc{background:var(--poc-soft);color:var(--poc);box-shadow:inset 0 0 0 1px var(--plan)}
-.note{font-size:.88rem;color:var(--muted);margin-top:16px;max-width:80ch}
-
-/* demo plan */
-.demo{display:grid;grid-template-columns:290px 1fr;gap:16px;align-items:start}
-@media (max-width:820px){.demo{grid-template-columns:1fr}}
-.scenes{display:flex;flex-direction:column;gap:6px}
-@media (max-width:820px){.scenes{flex-direction:row;overflow-x:auto;padding-bottom:6px}.scene-btn{min-width:210px}}
-.scene-btn{font:inherit;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--fg);padding:11px 14px;border-radius:12px;cursor:pointer;display:flex;gap:12px;align-items:baseline}
-.scene-btn .t{font-size:.8rem;font-weight:700;color:var(--accent);min-width:2.9em}
-.scene-btn .n{font-size:.92rem;font-weight:600}
-.scene-btn[aria-selected="true"]{border-color:var(--accent);background:var(--accent);color:var(--accent-ink)}
-.scene-btn[aria-selected="true"] .t{color:var(--accent-ink)}
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:18px;min-width:0}
-.panel .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.pill{font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:99px;background:var(--surface2);color:var(--muted)}
-.cols2{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-.panel h4{margin:0 0 8px;font-size:.72rem;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);font-weight:700}
-.panel ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px;font-size:.95rem;color:var(--muted)}
-.panel li .badge{margin-left:8px}
-.fallback{background:var(--accent-soft);border:1px solid rgba(246,196,81,.35);border-radius:12px;padding:12px 16px;font-size:.92rem}
-.fallback b{color:var(--accent)}
-.ladder{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:22px}
-.check{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line);font-size:.94rem;cursor:pointer;color:var(--muted)}
-.check:last-child{border-bottom:0}
-.check input{margin-top:5px;accent-color:var(--accent);width:16px;height:16px;flex:none}
-.check input:checked+span{text-decoration:line-through;opacity:.6}
-.prog{font-size:.82rem;font-weight:600;color:var(--muted)}
-.bar{height:6px;border-radius:99px;background:var(--surface2);overflow:hidden;margin:8px 0 6px}
-.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .25s}
-
-/* marketing */
-.persona{display:flex;flex-direction:column;gap:6px}
-.persona .who{font-weight:800;font-size:1.1rem}
-.persona b{color:var(--fg)}
-.seg-tier{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:99px;width:fit-content;background:var(--accent);color:var(--accent-ink)}
-.seg-tier.later{background:var(--plan-soft);color:var(--plan)}
-.pos{background:var(--accent);color:var(--accent-ink);border-radius:22px;padding:30px;font-size:clamp(1.15rem,2.6vw,1.6rem);line-height:1.35;font-weight:700;letter-spacing:-.015em;margin-bottom:22px}
-.pos small{display:block;font-size:.72rem;letter-spacing:.17em;text-transform:uppercase;margin-bottom:10px;font-weight:800;opacity:.75}
-.sub{margin-top:40px;display:flex;flex-direction:column;gap:16px}
-.sub>h3{font-size:1.4rem;font-weight:800;letter-spacing:-.02em}
-.steps{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
-.step{border-top:1px solid var(--line);padding-top:12px}
-.step b{display:block;font-weight:700}
-.step span{font-size:.9rem;color:var(--muted)}
-.toolkit{display:grid;gap:0 36px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
-.tk{border-top:1px solid var(--line);padding:16px 0 18px}
-.tk b{font-weight:800}
-.tk b i{font-style:normal;color:var(--accent);margin-right:6px}
-.tk p{color:var(--muted);font-size:.95rem;margin-top:4px}
-.plus{color:var(--muted);border-top:1px solid var(--line);padding-top:16px;font-size:.95rem}
-.plus b{color:var(--fg)}
-
-/* Q&A */
-.qa{display:flex;flex-direction:column;gap:8px}
-details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:0 18px}
-details[open]{border-color:var(--accent)}
-summary{cursor:pointer;padding:15px 0;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";color:var(--accent);font-size:1.4rem;font-weight:500;flex:none;line-height:1}
-details[open] summary::after{content:"–"}
-details .ans{padding:0 0 18px;color:var(--muted);font-size:.96rem;max-width:75ch}
-details .ans p+p{margin-top:8px}
-
-/* closing CTA band, full width like the leaflet footer */
-.cta{background:var(--accent);color:var(--accent-ink);margin:80px calc(-1*max(16px,env(safe-area-inset-left,0px))) 0;padding:46px max(16px,env(safe-area-inset-left,0px));padding-bottom:calc(46px + env(safe-area-inset-bottom,0px))}
-.cta .in{max-width:1100px;margin-inline:auto;display:flex;flex-direction:column;gap:12px}
-.cta h2{font-size:clamp(1.9rem,4.4vw,3rem);letter-spacing:-.03em}
-.cta p{font-size:1.15rem;font-weight:700}
-.cta small{font-size:.85rem;font-weight:600;opacity:.8}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar i{transition:none}}
-</style>
+<title>SchoolLine AI · Connected Learning Communities</title>
+<meta name="description" content="SchoolLine AI, built on Uniconnect: an always-on school front office on WhatsApp and phone. Team Data Dragons, SIPL × Uniconnect AI Hackathon 2026.">
+<meta property="og:title" content="SchoolLine AI · Connected Learning Communities">
+<meta property="og:description" content="Every enquiry answered. Every child accounted for. WhatsApp and voice AI for schools, in Sinhala, Tamil and English.">
+<meta name="theme-color" content="#0B1E30">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23F6C451'/%3E%3Cpath d='M16 6c6.1 0 11 4.1 11 9.3S22.1 24.6 16 24.6c-1.2 0-2.4-.2-3.5-.5L7 26.5l1.5-4.4C6.9 20.6 5 18.1 5 15.3 5 10.1 9.9 6 16 6z' fill='%230D2235'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
-<nav><div class="in">
-  <a class="logo" href="#top"><i aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D2235" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c5 0 9 3.4 9 7.6S17 18.2 12 18.2c-1 0-2-.1-2.9-.4L4.5 20l1.2-3.6C4 15.2 3 13 3 10.6 3 6.4 7 3 12 3z"/><circle cx="8.6" cy="10.6" r=".6" fill="#0D2235"/><circle cx="12" cy="10.6" r=".6" fill="#0D2235"/><circle cx="15.4" cy="10.6" r=".6" fill="#0D2235"/></svg></i>SchoolLine <b>AI</b></a>
-  <a class="l" href="#problem">Problem</a><a class="l" href="#solution">Solution</a><a class="l" href="#progress">Built so far</a><a class="l" href="#demo">Demo plan</a><a class="l" href="#market">Marketing</a><a class="l" href="#qa">Q&amp;A</a>
+
+<nav class="top" aria-label="Sections"><div class="in">
+  <a class="logo" href="#top"><i aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D2235" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c5 0 9 3.4 9 7.6S17 18.2 12 18.2c-1 0-2-.1-2.9-.4L4.5 20l1.2-3.6C4 15.2 3 13 3 10.6 3 6.4 7 3 12 3z"/></svg></i>SchoolLine <b>AI</b></a>
+  <a class="l" href="#problem">Problem</a>
+  <a class="l" href="#solution">Solution</a>
+  <a class="l" href="#demo">Live demo</a>
+  <a class="l" href="#progress">What's live</a>
+  <a class="l" href="#blueprint">Blueprint</a>
+  <a class="l" href="#build">Build plan</a>
+  <a class="l" href="#market">Go to market</a>
+  <a class="l" href="#faq">FAQ</a>
   <span class="pw">Powered by <b>uniconnect</b></span>
 </div></nav>
 
-<main class="wrap">
-
-<header class="hero" id="top">
+<div class="hero-bg">
+<header class="hero wrap" id="top">
   <div class="hero-text">
     <span class="eyebrow">SIPL × Uniconnect AI Hackathon 2026 · Team Data Dragons</span>
     <h1>Every enquiry answered. Every child <em>accounted for.</em></h1>
-    <p class="lede">Your always-on front office on WhatsApp. SchoolLine AI answers parents 24/7, sends arrival alerts, chases fees and keeps every child accounted for. Staff only handle what needs a person.</p>
-    <p class="sub-tag">Connected Learning Communities</p>
-    <div class="challenge"><span class="eyebrow">The challenge</span>How can educational institutions use Uniconnect AI to give students and parents timely information without overwhelming their staff?</div>
-    <div class="facts">
-      <div><b>12</b><span>school CRM modules</span></div>
-      <div><b>4</b><span>AI agents, chat and voice</span></div>
-      <div><b>6</b><span>principal dashboards</span></div>
-      <div><b>3</b><span>languages: Sinhala, Tamil, English</span></div>
-      <div><b>1</b><span>card payment flow, Stripe test mode</span></div>
+    <p class="lede">SchoolLine AI is an always-on front office on WhatsApp and the phone. It answers parents 24/7 in Sinhala, Tamil and English, confirms safe arrival at the gate, collects fees and keeps every family informed. Staff only handle what needs a person.</p>
+    <div class="btns">
+      <a class="btn pri" href="#demo">See the 10-minute demo <span aria-hidden="true">→</span></a>
+      <a class="btn sec" href="#blueprint">Explore the full blueprint</a>
     </div>
+    <p class="challenge"><b>Track · Connected Learning Communities</b>How can educational institutions use Uniconnect AI to give students and parents timely information without overwhelming their staff?</p>
   </div>
-  <div class="phone-wrap" aria-label="Example WhatsApp conversation">
+  <div class="phone-wrap" role="img" aria-label="Example WhatsApp conversation between a parent and SchoolLine AI about a late arrival">
     <div class="phone">
       <div class="scr">
         <div class="ph-head"><span class="av"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D2235" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6z"/></svg></span><div><b>SchoolLine AI</b><span>WhatsApp · online</span></div></div>
         <div class="chat">
           <span class="day">Today</span>
-          <div class="bub">Dinithi hasn't checked in yet (7:30 AM). Reply 1 absent, 2 late, 3 call me.</div>
-          <div class="bub out">2, the bus broke down.</div>
-          <div class="bub">Thank you. We've noted she's running late.</div>
+          <div class="bub">Dinithi hasn't checked in yet (7:30 AM). Reply 1 absent, 2 late, 3 call me.<small>7:30</small></div>
+          <div class="bub out">2, the bus broke down near Gampola.<small>7:34</small></div>
+          <div class="bub">Thank you. We've told her class teacher. We'll message you the moment she checks in.<small>7:34</small></div>
           <div class="bub dark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F6C451" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>Dinithi checked in at 8:18 AM.</div>
         </div>
       </div>
     </div>
-    <div class="lead-card"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F6C451" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6M18 8v6M15 11h6"/></svg></span><div><b>New lead from Facebook ad</b><span>Visit booked · Sat 10 AM</span></div></div>
+    <div class="lead-card"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F6C451" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6M18 8v6M15 11h6"/></svg></span><div><b>New enquiry from Facebook ad</b><span>AI booked a visit · Sat 10 AM</span></div></div>
   </div>
 </header>
+<div class="wrap" style="padding-bottom:8px">
+  <div class="stats" aria-label="Build at a glance">
+    <div><b>12</b><span>school CRM modules, one record per child</span></div>
+    <div><b>5</b><span>AI agents across chat and voice</span></div>
+    <div><b>17</b><span>approved WhatsApp templates</span></div>
+    <div><b>6</b><span>role-based school dashboards</span></div>
+    <div><b>3</b><span>languages: Sinhala, Tamil, English</span></div>
+  </div>
+</div>
+</div>
 
-<section id="problem">
-  <div class="sec-head"><span class="eyebrow">The problem</span><h2>Four things go wrong for a school every day</h2>
-  <p class="lede">The story we demo: Sunil and Kumari live near Hatton. Their daughter Dinithi has won a Grade 6 place at a school in Kandy. She will travel alone. They want to know she arrived.</p></div>
-  <div class="grid">
-    <div class="card"><span class="k">Parents</span><h3>Can't see the school day</h3><p>A child leaves at dawn. The family finds out how the day went when she gets home.</p></div>
-    <div class="card"><span class="k">Admissions</span><h3>Enquiries die on missed calls</h3><p>Questions come at night and on weekends. Nobody answers, and the family tries another school.</p></div>
-    <div class="card"><span class="k">Office</span><h3>The same questions, daily</h3><p>Fees, exam dates and documents, asked by phone in three languages, all day.</p></div>
+<main class="wrap">
+
+<!-- ================= PROBLEM ================= -->
+<section class="block" id="problem">
+  <div class="sec-head reveal"><span class="eyebrow"><b>01</b> The problem</span><h2>Four things go wrong for a school <em>every day</em></h2>
+  <p class="lede">Schools run on phone calls, paper notes and staff goodwill. Parents are left guessing, and the office answers the same questions all day.</p></div>
+  <div class="grid reveal">
+    <div class="card"><span class="k">Parents</span><h3>Can't see the school day</h3><p>A child leaves at dawn. The family finds out how the day went when she gets home in the evening.</p></div>
+    <div class="card"><span class="k">Admissions</span><h3>Enquiries die on missed calls</h3><p>Questions arrive at night and on weekends. Nobody answers, and the family tries another school.</p></div>
+    <div class="card"><span class="k">Office</span><h3>The same questions, daily</h3><p>Fees, exam dates and documents, asked by phone in three languages, all day long.</p></div>
     <div class="card"><span class="k">Everyone</span><h3>News arrives late</h3><p>Fee dues, marks and teacher concerns reach parents weeks late, on paper, or not at all.</p></div>
+  </div>
+  <div class="sub reveal">
+    <h3>The family in our story</h3>
+    <p class="lede">Dinithi has passed the Grade 5 scholarship exam and won a Grade 6 place at a school in Kandy, one to two hours from home near Hatton. She will travel alone by public bus. Her parents want one thing: to know she arrived.</p>
+    <div class="family">
+      <div class="who"><span class="av">S</span><div><b>Sunil, father</b><span>Sees the school's Facebook ad and sends the first WhatsApp message</span></div></div>
+      <div class="who"><span class="av">K</span><div><b>Kumari, mother</b><span>Calls the hotline at 9 PM, sends documents and pays the fee</span></div></div>
+      <div class="who kid"><span class="av">D</span><div><b>Dinithi, Grade 6</b><span>Scans her ID card QR at the school gate each morning</span></div></div>
+    </div>
   </div>
 </section>
 
-<section id="solution">
-  <div class="sec-head"><span class="eyebrow">The solution</span><h2>Five connected journeys, one system</h2>
-  <p class="lede">Every channel feeds one CRM. AI agents and workflows do the routine work. A person steps in only when needed.</p></div>
-  <div class="flow" aria-label="How SchoolLine works">
-    <div class="col"><h3>Parents reach us by</h3><ul><li>WhatsApp message</li><li>Hotline call (24/7)</li><li>Gate QR scan</li><li>Website chat</li><li>Facebook ad → WhatsApp</li></ul></div>
+<!-- ================= SOLUTION ================= -->
+<section class="block" id="solution">
+  <div class="sec-head reveal"><span class="eyebrow"><b>02</b> The solution</span><h2>Five connected journeys, <em>one system</em></h2>
+  <p class="lede">Every channel feeds one CRM. AI agents and workflows do the routine work. A person steps in only when needed, with the full conversation in front of them.</p></div>
+  <div class="flow reveal" aria-label="How SchoolLine works">
+    <div class="col"><h3>Parents reach the school by</h3><ul><li>WhatsApp message</li><li>24/7 hotline call</li><li>Gate QR scan</li><li>Website chat</li><li>Facebook ad → WhatsApp</li></ul></div>
     <div class="arrow" aria-hidden="true">→</div>
-    <div class="col core"><h3>Uniconnect AI</h3><ul><li><b>AI agents</b> answer chat and calls</li><li><b>Workflows</b> route, remind, update</li><li><b>CRM</b> keeps one record per child</li><li><b>Campaigns</b> call and message at scale</li></ul></div>
+    <div class="col core"><h3>SchoolLine on Uniconnect AI</h3><ul><li><b>AI agents</b> answer chat and calls</li><li><b>Workflows</b> route, remind, escalate, update</li><li><b>CRM</b> keeps one record per child</li><li><b>Campaigns</b> call and message at scale</li><li><b>Dashboards</b> show it all live</li></ul></div>
     <div class="arrow" aria-hidden="true">→</div>
-    <div class="col"><h3>Everyone gets</h3><ul><li>Parents: instant answers and alerts</li><li>Office: only the hard cases</li><li>Teachers: replies already logged</li><li>Principal: live dashboards</li></ul></div>
+    <div class="col"><h3>Everyone gets</h3><ul><li>Parents: instant answers and alerts</li><li>Office: only the hard cases</li><li>Teachers: replies already logged</li><li>Accounts: fees paid and matched</li><li>Principal: live dashboards</li></ul></div>
   </div>
-  <div class="tw" style="margin-top:18px"><table>
-    <thead><tr><th>Journey</th><th>What parents get</th><th>Main Uniconnect features</th></tr></thead>
+  <div class="tw reveal" style="margin-top:18px"><table>
+    <thead><tr><th>Journey</th><th>What parents get</th><th>Uniconnect features used</th></tr></thead>
     <tbody>
-      <tr><td>Admissions</td><td>Instant WhatsApp answers, a 24/7 hotline, documents sent by WhatsApp, reminders until paid, automatic enrolment</td><td>WhatsApp AI agent, IVR + queue + AI voice agent, Leads, campaigns, workflows</td></tr>
-      <tr><td>Safe arrival</td><td>An "arrived" message at the gate. A check message if she hasn't arrived. An AI call, then a duty teacher, if nobody replies</td><td>Webhook check-in, scheduled workflows, WhatsApp + SMS fallback, voice campaign, ring group</td></tr>
-      <tr><td>Fees</td><td>A secure pay link, reminders before the due date, receipts, bank slip upload</td><td>Scheduled workflows, Stripe checkout, SMS, AI reminder calls, CRM</td></tr>
+      <tr><td>Admissions</td><td>Instant WhatsApp answers, a 24/7 hotline that books visits, documents sent by WhatsApp, a secure pay link, automatic enrolment</td><td>WhatsApp AI agent, IVR + queue + AI voice agent, Leads, campaigns, workflows, Stripe checkout</td></tr>
+      <tr><td>Safe arrival</td><td>An "arrived" message at the gate. A check message if she hasn't arrived. An AI call, then a duty teacher, if nobody replies</td><td>Webhook check-in, scheduled workflows, WhatsApp + SMS fallback, voice campaign, ring group, conference</td></tr>
+      <tr><td>Fees</td><td>A pay link when a fee is raised, reminders 7 and 2 days before the due date, receipts, a bank-slip backup</td><td>Scheduled workflows, Stripe checkout, SMS, AI and live-agent reminder campaigns, CRM</td></tr>
       <tr><td>Marks &amp; progress</td><td>A personal AI summary of results, early notice of concerns, phone parent-teacher meetings</td><td>Bulk import, AI agent execution, conference calls, call summaries</td></tr>
       <tr><td>Everyday answers</td><td>Questions answered in Sinhala, Tamil or English. Notices in each parent's language. One weekly digest</td><td>Chat and voice agents, record lookup, AI translation, scheduled digest</td></tr>
     </tbody></table></div>
 </section>
 
-<section id="progress">
-  <div class="sec-head"><span class="eyebrow">What we have built</span><h2>Where the build stands today</h2>
-  <p class="lede">Filter by status. "Built and tested" means we ran it on the live system and saw it work.</p></div>
-  <div class="chips" id="chips" role="group" aria-label="Filter by status"></div>
-  <div class="status-list" id="status-list"></div>
-  <p class="note">Payment is Stripe in test mode, so no real money moves. Sample school figures (Grade 6 fees, dates) are placeholders for the demo and will be replaced by a school's approved numbers.</p>
-</section>
-
-<section id="demo">
-  <div class="sec-head"><span class="eyebrow">Demo plan</span><h2>A 10-minute story, told live</h2>
-  <p class="lede">An opening video, eight live scenes on real phones, and a closing video. Pick a scene to see what judges see, what runs behind it, and the fallback.</p></div>
-  <div class="demo">
+<!-- ================= DEMO ================= -->
+<section class="block" id="demo">
+  <div class="sec-head reveal"><span class="eyebrow"><b>03</b> Live demo</span><h2>A 10-minute story, <em>told live</em></h2>
+  <p class="lede">An opening video, eight live scenes on real phones, and a closing video. Choose a scene to see what happens on screen and what runs behind it.</p></div>
+  <div class="demo reveal">
     <div class="scenes" id="scenes" role="tablist" aria-label="Demo scenes"></div>
     <div class="panel" id="scene-panel" role="tabpanel" aria-live="polite"></div>
   </div>
 
-  <div class="ladder">
-    <div class="card">
-      <h3>The arrival escalation ladder</h3>
-      <p>The strongest moment of the demo. Each step only fires if the one before got no answer.</p>
-      <ul style="margin:6px 0 0;padding-left:18px;font-size:.93rem;display:flex;flex-direction:column;gap:5px">
-        <li><b>7:30</b> No check-in. WhatsApp to the parent: 1 absent, 2 late, 3 call me.</li>
-        <li><b>7:45</b> No reply. AI voice call (Safe Arrival Caller).</li>
-        <li><b>8:00</b> Still unclear. High-priority request to the Duty Teachers ring group.</li>
-        <li><b>Any time</b> Gate QR scan sends "arrived" within seconds and turns the board green.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Before we go on stage</h3>
-      <div class="prog" id="prog">0 of 0 done</div><div class="bar"><i id="bar"></i></div>
-      <div id="checks"></div>
+  <div class="sub reveal">
+    <h3>The safe-arrival escalation ladder</h3>
+    <p class="lede">The heart of the demo. Each step fires only if the one before got no answer, and a gate scan resolves everything instantly.</p>
+    <div class="card" style="padding:28px">
+      <div class="ladder">
+        <div class="st"><span class="dot">1</span><div class="tm">7:30</div><h3>WhatsApp check</h3><p>No check-in by the cutoff. The parent gets: 1 absent, 2 late, 3 call me. Replies are read by AI in any of the three languages.</p></div>
+        <div class="st"><span class="dot">2</span><div class="tm">7:45</div><h3>AI voice call</h3><p>No reply. The Safe Arrival Caller rings the parent and records the reason and expected time.</p></div>
+        <div class="st"><span class="dot">3</span><div class="tm">8:00</div><h3>Duty teacher</h3><p>Still unclear. A high-priority request goes to the Duty Teachers ring group, who conference in the class teacher.</p></div>
+        <div class="st ok"><span class="dot">✓</span><div class="tm">Any time</div><h3>Gate QR scan</h3><p>"Checked in at 8:18 AM" reaches the parent within seconds and the safety board turns green.</p></div>
+      </div>
     </div>
   </div>
-  <div class="grid" style="margin-top:14px">
-    <div class="card"><span class="k">Roles on the day</span><h3>Who plays whom</h3><p>Presenter plays the Principal. CRM owner plays Accounts. Workflow owner is the operator who fires demo webhooks. Telephony owner plays the Admissions Officer and Duty Teacher. Channels owner plays Kumari on Phone A.</p></div>
-    <div class="card"><span class="k">Short on time</span><h3>The 6-minute version</h3><p>Show one document instead of four. Skip the whisper beat and the judge-phone escalation. Show the through-term scene as one slide.</p></div>
-    <div class="card"><span class="k">If something fails</span><h3>Never debug on stage</h3><p>Play the backup recording of that scene and move on. Every live scene is screen-recorded at the dress rehearsal.</p></div>
+
+  <div class="sub reveal">
+    <h3>From enquiry to student, without retyping</h3>
+    <div class="chain">
+      <span>WhatsApp or hotline<small>enquiry created</small></span><i>›</i>
+      <span>Visit booked<small>by the AI agent</small></span><i>›</i>
+      <span>Docs complete<small>sent on WhatsApp</small></span><i>›</i>
+      <span>Offer sent<small>letter + invoice</small></span><i>›</i>
+      <span>Payment confirmed<small>Stripe or bank slip</small></span><i>›</i>
+      <span class="hot">Enrolled<small>guardian + student + Term 1 fee</small></span>
+    </div>
+    <p class="note">After enrolment the student record collects attendance, fees, results, concerns and meetings, all linked back to the guardian who first wrote in.</p>
+  </div>
+
+  <div class="sub reveal rvs">
+    <h3>What is real in the demo</h3>
+    <div class="grid g3">
+      <div class="card"><h3><span class="dotc" style="background:var(--live)"></span>Real</h3><p>WhatsApp messages and calls on real phones, CRM records, AI agents, workflows, dashboards, and Stripe card payments in test mode.</p></div>
+      <div class="card"><h3><span class="dotc" style="background:var(--accent)"></span>Simulated</h3><p>The gate scan is a QR form posting to a webhook, not a hardware reader. The 7:30 sweep is fired on cue instead of waiting for the clock. Fee figures are samples.</p></div>
+      <div class="card"><h3><span class="dotc" style="background:var(--road)"></span>Roadmap</h3><p>Automatic Facebook lead capture (built in code, next release), LMS homework and grade sync, and RFID or biometric gate devices.</p></div>
+    </div>
   </div>
 </section>
 
-<section id="market">
-  <div class="sec-head"><span class="eyebrow">Marketing</span><h2>Who we sell to, and why they buy</h2>
-  <p class="lede">We start where the pain is sharpest: schools that compete for admissions and answer phones all day. Figures below marked as targets are goals we will measure in a pilot, not results.</p></div>
+<!-- ================= PROGRESS ================= -->
+<section class="block" id="progress">
+  <div class="sec-head reveal"><span class="eyebrow"><b>04</b> What's live</span><h2>Where the build <em>stands today</em></h2>
+  <p class="lede">"Live and tested" means we ran it end to end on our Uniconnect instance and saw it work. Filter by status.</p></div>
+  <div class="reveal">
+    <div class="meter" id="meter" aria-hidden="true"></div>
+    <div class="legend" id="meter-legend" style="margin-bottom:22px"></div>
+    <div class="chips" id="chips" role="group" aria-label="Filter by status"></div>
+    <div class="status-list" id="status-list"></div>
+    <p class="note" style="margin-top:16px">Payments use Stripe in test mode, so no real money moves. Sample school figures (Grade 6 fees, dates) are placeholders and will be replaced by a school's approved numbers.</p>
+  </div>
+</section>
 
-  <div class="pos"><small>Positioning</small>For school leaders who lose enquiries and drown in routine calls, SchoolLine is the parent communication system that answers on WhatsApp and phone in Sinhala, Tamil and English, 24 hours a day, so parents stay informed, staff stay focused, and children stay safe.</div>
+<!-- ================= BLUEPRINT ================= -->
+<section class="block" id="blueprint">
+  <div class="sec-head reveal"><span class="eyebrow"><b>05</b> Solution blueprint</span><h2>The full plan, <em>module by module</em></h2>
+  <p class="lede">Everything a school needs, configured on Uniconnect: the data model, who can see what, every channel, the AI agents, 24 workflows, campaigns, integrations and dashboards.</p></div>
 
-  <div class="sub">
+  <div class="tabs" role="tablist" aria-label="Blueprint sections" id="bp-tabs">
+    <button class="tab" role="tab" id="t-data" aria-controls="p-data" aria-selected="true">Data model</button>
+    <button class="tab" role="tab" id="t-access" aria-controls="p-access" aria-selected="false" tabindex="-1">Roles &amp; access</button>
+    <button class="tab" role="tab" id="t-channels" aria-controls="p-channels" aria-selected="false" tabindex="-1">Channels</button>
+    <button class="tab" role="tab" id="t-agents" aria-controls="p-agents" aria-selected="false" tabindex="-1">AI agents</button>
+    <button class="tab" role="tab" id="t-wf" aria-controls="p-wf" aria-selected="false" tabindex="-1">Workflows</button>
+    <button class="tab" role="tab" id="t-camp" aria-controls="p-camp" aria-selected="false" tabindex="-1">Campaigns</button>
+    <button class="tab" role="tab" id="t-int" aria-controls="p-int" aria-selected="false" tabindex="-1">Integrations</button>
+    <button class="tab" role="tab" id="t-dash" aria-controls="p-dash" aria-selected="false" tabindex="-1">Dashboards</button>
+  </div>
+
+  <!-- DATA MODEL -->
+  <div class="tabpanel" role="tabpanel" id="p-data" aria-labelledby="t-data">
+    <div class="tp-head"><h3>Twelve modules, one record per child</h3><p>The built-in Leads module becomes Admission Enquiries, so campaigns, follow-up dates and assignment work out of the box. Ten custom modules hold the school's records, plus a Fee Reminders queue for call campaigns. Everything links, so an enquiry becomes a guardian and a student with no retyping.</p></div>
+    <div class="dm" aria-label="How the modules link">
+      <div class="grp"><b>Before enrolment</b>
+        <div class="m core">Admission Enquiries <small>Leads</small></div>
+        <div class="m">Parent Requests <small>AI hand-offs</small></div>
+      </div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="grp"><b>The family</b>
+        <div class="m">Guardians <small>chat + caller ID</small></div>
+        <div class="m core">Students <small>admission no + QR</small></div>
+        <div class="m">Classes <small>teacher, cutoff, capacity</small></div>
+      </div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="grp"><b>Every day after</b>
+        <div class="m">Attendance <small>arrival + escalation</small></div>
+        <div class="m">Fees · Fee Reminders <small>pay links, calls</small></div>
+        <div class="m">Results <small>AI summaries</small></div>
+        <div class="m">Student Concerns → Meetings <small>phone conferences</small></div>
+        <div class="m">Notices <small>3 languages</small></div>
+      </div>
+    </div>
+    <div class="mods" id="mods"></div>
+    <div class="card">
+      <span class="k">Also configured</span>
+      <ul>
+        <li><b>Dropdown rules:</b> Grade → Class on Students; Audience → Grades / Class on Notices; Lost stage requires a Lost reason on Enquiries.</li>
+        <li><b>Layouts per role:</b> Admissions sees stage, documents and AI summary first; teachers never see fees; Accounts sees payment fields first.</li>
+        <li><b>Saved views:</b> Not arrived today, Running late today, Overdue fees, Visits this week, Open high-priority requests (25 saved views across all modules).</li>
+        <li><b>Audit log</b> on every module, as proof of each message and status change.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ACCESS -->
+  <div class="tabpanel" role="tabpanel" id="p-access" aria-labelledby="t-access" hidden>
+    <div class="tp-head"><h3>Everyone sees exactly what their job needs</h3><p>Permissions are set per role and per module at three levels: <b>All</b> records, <b>Group</b> (records assigned to the user's group) and <b>Own</b> (records assigned to the user). Sensitive fields are locked to named roles, and dashboards are shared view-only by role.</p></div>
+    <div class="grid g3">
+      <div class="card"><span class="k">Roles</span><h3>8 school roles</h3><p>Principal, Admissions, Admissions Head, Office, Accounts, Class Teacher, Counsellor, and an Integration service account for APIs and the principal's AI assistant.</p></div>
+      <div class="card"><span class="k">Queues &amp; groups</span><h3>5 teams</h3><p>Admissions, Office and Accounts call queues; a Duty Teachers ring group for safety calls (never routed to AI); Grade 6 Teachers for group access.</p></div>
+      <div class="card"><span class="k">Privacy</span><h3>Parents see only their own child</h3><p>The assistant recognises a guardian by mobile number and answers only about that guardian's children. Health notes and payment details stay locked.</p></div>
+    </div>
+    <h3 class="h3big">Module permission matrix</h3>
+    <p class="note">C = create, V = view, E = edit, D = delete. The level shows which records.</p>
+    <div class="tw"><table class="mx">
+      <thead><tr><th>Module</th><th>Principal</th><th>Admissions</th><th>Office</th><th>Accounts</th><th>Class Teacher</th><th>Counsellor</th><th>Integration</th></tr></thead>
+      <tbody id="matrix"></tbody>
+    </table></div>
+    <div class="grid">
+      <div class="card"><span class="k">Field-level locks</span><ul>
+        <li>Student health note: Principal, Class Teacher, Counsellor only</li>
+        <li>Concern details and action plan: Principal, own Class Teacher, Counsellor</li>
+        <li>Payment reference and Paid status: Accounts only</li>
+        <li>Guardian mobile: read-only for teachers and Office, so caller recognition never breaks</li>
+        <li>Notice "Ready to send": Office and Principal only, so a person reviews every broadcast</li>
+      </ul></div>
+      <div class="card"><span class="k">Feature access</span><ul>
+        <li>Workflows, AI agents, integrations: Principal (system admin)</li>
+        <li>Campaigns: Principal, Admissions</li>
+        <li>Listen, whisper, barge-in on calls: Principal, Admissions Head</li>
+        <li>Message templates: Principal, Office</li>
+        <li>Unified Inbox: Admissions, Office, Accounts (own group)</li>
+        <li>Bulk import: Office (students, guardians), Accounts (fees), teachers (results)</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- CHANNELS -->
+  <div class="tabpanel" role="tabpanel" id="p-channels" aria-labelledby="t-channels" hidden>
+    <div class="tp-head"><h3>Reach parents where they already are</h3><p>One school number for WhatsApp and the hotline. Within 24 hours of a parent's last message the assistant can reply freely; outside it, only Meta-approved templates go out, with SMS as the fallback when WhatsApp fails.</p></div>
+    <div class="grid">
+      <div class="card"><span class="k">WhatsApp</span><h3>Business number + AI</h3><p>17 approved templates in Sinhala, Tamil and English. Photos and PDFs from parents land on the right record.</p></div>
+      <div class="card"><span class="k">Voice</span><h3>24/7 hotline on 3CX</h3><p>Three-language IVR, queues that overflow to an AI voice agent, recording, live transcription and AI call summaries.</p></div>
+      <div class="card"><span class="k">SMS</span><h3>Fallback that always lands</h3><p>Arrived, not-arrived and fee-due texts when WhatsApp delivery fails or a parent has no WhatsApp.</p></div>
+      <div class="card"><span class="k">Email + web</span><h3>Letters and chat</h3><p>Offer letters, receipts and welcome packs by email; the same assistant as a chat widget on the school website.</p></div>
+    </div>
+    <h3 class="h3big">Hotline routing</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Menu option</th><th>Goes to</th><th>When nobody answers</th></tr></thead>
+      <tbody>
+        <tr><td>1 · Admissions</td><td>Admissions queue (ring all)</td><td>After 15 s or out of hours → Admissions Voice Agent, which knows the caller and books visits</td></tr>
+        <tr><td>2 · Fees</td><td>Accounts queue, office hours</td><td>Voice agent answers; hand-off creates a Parent Request</td></tr>
+        <tr><td>3 · Attendance &amp; general</td><td>Office queue</td><td>Voice agent answers; hand-off creates a Parent Request</td></tr>
+        <tr><td>9 · Urgent safety</td><td>Duty Teachers ring group</td><td>Never routed to AI</td></tr>
+      </tbody></table></div>
+    <p class="note">Also on: supervisor listen, whisper and barge-in for the Admissions Head, and conference calls for parent-teacher meetings and duty-teacher escalation.</p>
+    <h3 class="h3big">WhatsApp template set</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Template</th><th>What the parent receives</th><th>Sent by</th></tr></thead>
+      <tbody id="templates"></tbody></table></div>
+  </div>
+
+  <!-- AGENTS -->
+  <div class="tabpanel" role="tabpanel" id="p-agents" aria-labelledby="t-agents" hidden>
+    <div class="tp-head"><h3>AI that answers, and knows when to hand off</h3><p>Each agent has a narrow job, identifies the parent against the CRM, answers only from school-approved facts, and passes anything it cannot handle to a person with a summary attached.</p></div>
+    <div class="tw"><table>
+      <thead><tr><th>Agent</th><th>Mode</th><th>Where it works</th><th>Knows the caller from</th><th>Hands off to</th><th>Status</th></tr></thead>
+      <tbody id="agents"></tbody></table></div>
+    <div class="card"><span class="k">Language rule</span><p>Each voice agent speaks one language. English and Tamil voice agents come first; Sinhala voice is used only if it passes our quality test. Otherwise Sinhala-speaking parents get the recorded IVR plus Sinhala WhatsApp text, which works well.</p></div>
+    <h3 class="h3big">How the agents are instructed</h3>
+    <div class="mods">
+      <details class="acc"><summary><span class="mn">AI</span><span class="tt"><b>SchoolLine Assistant</b><span>WhatsApp and web chat</span></span></summary>
+<pre class="prompt">You are SchoolLine, the parent assistant for [School]. Reply in the parent's language (Sinhala, Tamil or English), in short WhatsApp-style messages.
+If the parent is a known guardian, discuss only their own children, using their records: today's attendance, fees, results, meetings.
+If they are a new enquiry, help with admissions: explain fees, documents and the visit, and ask for the child's name, grade, current school and home town.
+Answer school facts only from approved school information. If unsure, say so and offer to pass the question to the office.
+Never give medical advice. If a parent sounds worried about a child's safety, tell them the duty teacher is being informed and hand off immediately.
+The school does not provide transport; do not promise transport arrangements.</pre></details>
+      <details class="acc"><summary><span class="mn">AI</span><span class="tt"><b>Safe Arrival Caller</b><span>Voice campaign at 7:45</span></span></summary>
+<pre class="prompt">You are calling from [School] because [child] has not checked in today.
+Greet the parent by name, say you are an automated assistant from the school, and ask if [child] is absent today or on the way.
+Capture: absent / running late / don't know, the reason, and the expected arrival time.
+If the parent does not know where the child is, or is worried, say you are connecting them to the duty teacher now and transfer.
+Keep the call under one minute. Stay calm and reassuring.</pre></details>
+      <details class="acc"><summary><span class="mn">AI</span><span class="tt"><b>Message Reader</b><span>Inside workflows, returns JSON</span></span></summary>
+<pre class="prompt">Read the parent's WhatsApp message and return only JSON:
+{"intent": "absent|late|call_me|question|document|slip|other",
+ "reason": "sick|transport|family|unknown|other",
+ "expected_time": "HH:MM or null",
+ "child_name": "...", "grade": "...", "current_school": "...", "home_town": "...",
+ "parent_name": "...", "relationship": "...", "language": "..."}
+Messages may be in Sinhala, Tamil, English or a mix (Singlish / Tanglish).</pre></details>
+    </div>
+    <div class="card"><span class="k">School knowledge</span><ul>
+      <li>Prospectus and Grade 6 admission guide</li>
+      <li>Fee structure with payment rules</li>
+      <li>Attendance and safe-arrival policy: gate time, cutoff, what happens when a child is late</li>
+      <li>School calendar and exam timetable</li>
+      <li>Parent FAQ: uniforms, books, clubs, contact hours</li>
+    </ul></div>
+  </div>
+
+  <!-- WORKFLOWS -->
+  <div class="tabpanel" role="tabpanel" id="p-wf" aria-labelledby="t-wf" hidden>
+    <div class="tp-head"><h3>24 workflows do the routine work</h3><p>Built from Uniconnect triggers (WhatsApp received, record created or updated, schedules, webhooks, call ended, delivery failed) and actions (CRM, WhatsApp, SMS, email, AI agent execution, add to campaign, make call, API request), with routers, conditions and loops.</p>
+      <div class="legend"><span><span class="badge b-p1">P1</span> needed for the demo</span><span><span class="badge b-p2">P2</span> strong extra</span><span><span class="badge b-p3">P3</span> if time allows</span></div></div>
+    <div class="chips" id="wfchips" role="group" aria-label="Filter workflows by journey"></div>
+    <div class="wfs" id="wfs"></div>
+  </div>
+
+  <!-- CAMPAIGNS -->
+  <div class="tabpanel" role="tabpanel" id="p-camp" aria-labelledby="t-camp" hidden>
+    <div class="tp-head"><h3>Calls and messages at scale</h3><p>Workflows add the right people to the right campaign at the right moment. Parents who opt out of promotions go on the do-not-contact list; safety, fee and result messages are never blocked.</p></div>
+    <div class="tw"><table>
+      <thead><tr><th>Campaign</th><th>Type</th><th>Contacts from</th><th>Agent or script</th><th>Fed by</th></tr></thead>
+      <tbody>
+        <tr><td>Admission Payment Follow-up</td><td class="nw">Voice · AI</td><td>Admission Enquiries</td><td>Payment reminder caller</td><td>WF-04, WF-05</td></tr>
+        <tr><td>Safe Arrival Check</td><td class="nw">Voice · AI</td><td>Guardians</td><td>Safe Arrival Caller</td><td>WF-10 at 7:45</td></tr>
+        <tr><td>Fee Reminder Call</td><td class="nw">Voice · AI</td><td>Fee Reminders</td><td>Fee Reminder Agent, with retries</td><td>WF-13</td></tr>
+        <tr><td>Fee Reminder (live agent)</td><td class="nw">Voice · staff</td><td>Fee Reminders</td><td>Accounts call script</td><td>WF-13 after AI attempts</td></tr>
+        <tr><td>Counsellor Outreach</td><td class="nw">Voice · staff</td><td>Guardians</td><td>Counsellor call script</td><td>WF-20</td></tr>
+        <tr><td>School Notices</td><td class="nw">WhatsApp</td><td>Guardians (filtered)</td><td><code>school_notice</code></td><td>WF-18 or manual</td></tr>
+        <tr><td>Notice SMS backup</td><td class="nw">SMS</td><td>Guardians without WhatsApp</td><td>SMS template</td><td>Manual</td></tr>
+        <tr><td>Monthly Newsletter</td><td class="nw">Email</td><td>Guardians</td><td>Newsletter template</td><td>Manual</td></tr>
+      </tbody></table></div>
+  </div>
+
+  <!-- INTEGRATIONS -->
+  <div class="tabpanel" role="tabpanel" id="p-int" aria-labelledby="t-int" hidden>
+    <div class="tp-head"><h3>Plugs into what a school already has</h3><p>Open webhooks and a REST API mean any gate device, payment provider or school system can feed SchoolLine.</p></div>
+    <div class="tw"><table>
+      <thead><tr><th>Integration</th><th>How it works</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Stripe payments</td><td>A new fee creates a secure checkout link sent on WhatsApp and SMS. The payment notice comes back to a webhook, which finds the invoice and marks it Paid with the date and reference.</td><td><span class="badge b-live">Live &amp; tested</span></td></tr>
+        <tr><td>Gate QR check-in</td><td>Each ID card carries a QR with the admission number. A gate tablet form posts to the <code>gate-checkin</code> webhook, which updates attendance and messages the parent.</td><td><span class="badge b-testing">Final testing</span></td></tr>
+        <tr><td>Office tap</td><td>Office staff record arrival from a tablet when a child forgets the card.</td><td><span class="badge b-live">Live &amp; tested</span></td></tr>
+        <tr><td>School systems via API</td><td>An Integration service account creates attendance or imports marks from any existing system through the REST API.</td><td><span class="badge b-live">Live &amp; tested</span></td></tr>
+        <tr><td>Principal's AI assistant</td><td>An AI client connects to the Uniconnect MCP server with the service account, limited to what the Integration role allows.</td><td><span class="badge b-build">Finale build</span></td></tr>
+        <tr><td>Facebook lead capture</td><td>Ad leads flow into Admission Enquiries automatically, tagged with the campaign. Built in code; the demo uses the ad's pre-filled WhatsApp message.</td><td><span class="badge b-roadmap">Roadmap</span></td></tr>
+        <tr><td>LMS (Moodle, Google Classroom)</td><td>Homework and grade alerts through API collections and the Execute API Request action.</td><td><span class="badge b-roadmap">Roadmap</span></td></tr>
+        <tr><td>RFID / biometric gates</td><td>The device software posts to the same <code>gate-checkin</code> webhook. No change on our side.</td><td><span class="badge b-roadmap">Roadmap</span></td></tr>
+      </tbody></table></div>
+    <div class="grid">
+      <div class="card"><span class="k">Gate scan payload</span>
+<pre class="code">{
+  <span class="s">"admission_no"</span>: "ADM-2027-0061",
+  <span class="s">"scanned_at"</span>: "2027-01-12T08:18:04+05:30",
+  <span class="s">"gate"</span>: "Main gate",
+  <span class="s">"device"</span>: "Gate tablet 1"
+}</pre></div>
+      <div class="card"><span class="k">Gate form script (Apps Script)</span>
+<pre class="code">function onFormSubmit(e) {
+  const adm = e.namedValues["Admission No"][0];
+  UrlFetchApp.fetch(WEBHOOK_URL, {
+    method: "post",
+    contentType: "application/json",
+    payload: JSON.stringify({
+      admission_no: adm,
+      scanned_at: new Date().toISOString(),
+      gate: "Main gate" })
+  });
+}</pre></div>
+    </div>
+  </div>
+
+  <!-- DASHBOARDS -->
+  <div class="tabpanel" role="tabpanel" id="p-dash" aria-labelledby="t-dash" hidden>
+    <div class="tp-head"><h3>Six dashboards, each shared with the people who act on it</h3><p>Built on Uniconnect's analytics, published and shared view-only by role.</p></div>
+    <div class="grid g3">
+      <div class="card hl"><span class="k">Principal · Office · Teachers</span><h3>Morning Safety Board</h3><p>Expected today, checked in, running late, not arrived, AI calls in progress, escalated to the duty teacher, by class. Built for a wall screen.</p></div>
+      <div class="card"><span class="k">Principal · Admissions</span><h3>Admissions Funnel</h3><p>Enquiries by source (Facebook ad, WhatsApp, hotline), funnel by stage, visits this week, documents and payments pending, enrolled, after-hours calls the AI handled.</p></div>
+      <div class="card"><span class="k">Principal · Office</span><h3>Parent Communication</h3><p>Messages sent, delivered and failed, SMS fallbacks, time from check-in to message, messages by language.</p></div>
+      <div class="card"><span class="k">Principal · Accounts</span><h3>Fees</h3><p>Collected vs outstanding by grade, overdue ageing, reminder and AI call outcomes, slips waiting for checks.</p></div>
+      <div class="card"><span class="k">Principal</span><h3>Staff Load</h3><p>Questions answered by AI vs staff, hand-offs by category, SLA met, hotline answered and abandoned, calls by hour.</p></div>
+      <div class="card"><span class="k">Principal · Counsellor</span><h3>Student Wellbeing</h3><p>Repeated late or absent students, open concerns, meetings held, action plans due.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BUILD PLAN ================= -->
+<section class="block" id="build">
+  <div class="sec-head reveal"><span class="eyebrow"><b>06</b> Build plan</span><h2>How we built it, <em>and how fast it installs</em></h2>
+  <p class="lede">Six days of preparation, then a full school setup from a clean install in about seven hours on finale day. The same playbook is how we would onboard a real school.</p></div>
+  <div class="grid reveal" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr));align-items:start">
+    <div class="card" style="padding:26px">
+      <span class="k">Before the finale · 12–16 Nov</span>
+      <div class="tl" style="margin-top:12px">
+        <div class="ev done"><span class="d">12 Nov</span><b>Data model and channels</b><p>12 CRM modules, roles and screens built from one spec. WhatsApp templates submitted in three languages. Sample school loaded: 2 classes, 20 students, 40 fees, 120 results.</p></div>
+        <div class="ev done"><span class="d">13 Nov</span><b>Agents, layouts, dashboards</b><p>Admissions Voice Agent, role layouts, email templates and six dashboards published by role.</p></div>
+        <div class="ev done"><span class="d">14–15 Nov</span><b>WhatsApp, payments, gate</b><p>WhatsApp connected with the SchoolLine Assistant, Stripe pay links and fee reminders, gate check-in webhook, voice agent tests.</p></div>
+        <div class="ev done"><span class="d">16 Nov</span><b>Live scenes end to end</b><p>WhatsApp router and enquiry capture, hotline visit booking, enrolment, offer and payment ladder, arrival checks, results and concerns.</p></div>
+        <div class="ev"><span class="d">17 Nov</span><b>Finale</b><p>Install, build, rehearse, present.</p></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="card"><span class="k">Finale day · about 7 hours</span>
+        <div class="hours" style="grid-template-columns:repeat(2,minmax(0,1fr));margin-top:6px">
+          <div><b>Hour 0–1</b><p>Install. Connect WhatsApp, SMS, email, 3CX. Users, groups, roles.</p></div>
+          <div><b>Hour 1–2</b><p>12 modules, links, rules, layouts. Import CSVs.</p></div>
+          <div><b>Hour 2–3</b><p>AI agents and knowledge. IVR, queues, overflow to AI. Campaigns.</p></div>
+          <div><b>Hour 3–5</b><p>P1 workflows for admissions, then safe arrival. Test each scene.</p></div>
+          <div><b>Hour 5–6</b><p>Dashboards, gate form and webhook, P2 workflows.</p></div>
+          <div><b>Hour 6–7</b><p>Reset demo data. Two full rehearsals.</p></div>
+        </div>
+      </div>
+      <div class="card"><span class="k">Onboarding a real school</span><p>Data goes in by CSV in a fixed order: classes → guardians → students → fees → results. Then the school's WhatsApp number, SMS sender, phone system and approved documents are connected.</p></div>
+    </div>
+  </div>
+  <div class="sub reveal">
+    <h3>Team Data Dragons</h3>
+    <div class="team">
+      <div class="card"><span class="k">Lead</span><b>Thilina</b><span>Presentation, run sheet, roles and permissions</span></div>
+      <div class="card"><span class="k">CRM</span><b>CRM owner</b><span>Modules, fields, imports, dashboards</span></div>
+      <div class="card"><span class="k">Automation</span><b>Workflow owner</b><span>Workflows, webhooks, payments</span></div>
+      <div class="card"><span class="k">Voice</span><b>Telephony owner</b><span>3CX, IVR, queues, voice agents, campaigns</span></div>
+      <div class="card"><span class="k">Messaging</span><b>Channels owner</b><span>WhatsApp, SMS, email, chat agent, knowledge</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MARKET ================= -->
+<section class="block" id="market">
+  <div class="sec-head reveal"><span class="eyebrow"><b>07</b> Go to market</span><h2>Who we sell to, <em>and why they buy</em></h2>
+  <p class="lede">We start where the pain is sharpest: schools that compete for admissions and answer phones all day. Figures marked as targets are goals for a pilot, not results.</p></div>
+
+  <div class="pos reveal"><small>Positioning</small>For school leaders who lose enquiries and drown in routine calls, SchoolLine is the parent communication system that answers on WhatsApp and phone in Sinhala, Tamil and English, 24 hours a day, so parents stay informed, staff stay focused, and children stay safe.</div>
+
+  <div class="sub reveal">
     <h3>Admissions marketing, built in</h3>
     <p class="lede">Every lead from every campaign lands in one pipeline, and SchoolLine AI follows up until the visit is booked.</p>
     <div class="pipe"><span>Facebook ad</span><i>›</i><span>WhatsApp lead</span><i>›</i><span>AI follow-up</span><i>›</i><span>Visit booked</span><i>›</i><span class="last">Enrolled</span></div>
@@ -335,30 +458,28 @@ details .ans p+p{margin-top:8px}
       <div class="tk"><b><i>05</i>Admissions funnel</b><p>Leads by source, visits and enrolments at a glance.</p></div>
       <div class="tk"><b><i>06</i>Counsellor follow-up</b><p>Hot leads go to a counsellor with the full chat history.</p></div>
     </div>
-    <p class="plus"><b>Plus:</b> 24/7 AI hotline in Sinhala, Tamil and English · safe-arrival alerts on WhatsApp · fee reminders · opt-outs always respected</p>
   </div>
 
-  <div class="sub"><h3>Target customers</h3>
+  <div class="sub reveal"><h3>Target customers</h3>
   <div class="grid">
     <div class="card"><span class="seg-tier">First wave</span><h3>Private and international schools</h3><p>They compete for admissions, charge fees, and parents expect a modern experience. They feel every missed enquiry and every late payment.</p></div>
     <div class="card"><span class="seg-tier">First wave</span><h3>Tuition institutes and pre-schools</h3><p>Small staff, many parents, fees to chase every month, and constant "is my child there?" calls.</p></div>
     <div class="card"><span class="seg-tier">First wave</span><h3>Colleges and vocational institutes</h3><p>Admissions arrive from Facebook ads. They need fast answers, document collection and payment follow-up.</p></div>
     <div class="card"><span class="seg-tier later">Second wave</span><h3>School groups and chains</h3><p>One head office wants the same dashboards across many branches.</p></div>
     <div class="card"><span class="seg-tier later">Second wave</span><h3>Government and provincial schools</h3><p>Very large volume, Sinhala and Tamil first. Reached through partner programmes, with a longer sales cycle.</p></div>
-  </div>
-  </div>
+  </div></div>
 
-  <div class="sub">
+  <div class="sub reveal">
     <h3>Who decides and who uses it</h3>
     <div class="grid">
-      <div class="card persona"><span class="who">Principal</span><p><b>Cares about:</b> child safety, reputation, calm staff.<br><b>Sees:</b> Morning Safety Board, admissions funnel, staff load.</p></div>
-      <div class="card persona"><span class="who">Admissions head</span><p><b>Cares about:</b> not losing night and weekend enquiries.<br><b>Sees:</b> every enquiry, call summary, stage and documents in one record.</p></div>
-      <div class="card persona"><span class="who">Accounts</span><p><b>Cares about:</b> fees collected on time.<br><b>Sees:</b> pay links sent, invoices marked paid automatically, slips to verify.</p></div>
-      <div class="card persona"><span class="who">Parents</span><p><b>Care about:</b> knowing their child is safe, and fast answers in their language.<br><b>Get:</b> WhatsApp messages. No new app to install.</p></div>
+      <div class="card persona"><span class="k">Buyer</span><h3>Principal</h3><p><b>Cares about:</b> child safety, reputation, calm staff.<br><b>Sees:</b> Morning Safety Board, admissions funnel, staff load.</p></div>
+      <div class="card persona"><span class="k">Champion</span><h3>Admissions head</h3><p><b>Cares about:</b> not losing night and weekend enquiries.<br><b>Sees:</b> every enquiry, call summary, stage and documents in one record.</p></div>
+      <div class="card persona"><span class="k">User</span><h3>Accounts</h3><p><b>Cares about:</b> fees collected on time.<br><b>Sees:</b> pay links sent, invoices marked paid automatically, slips to verify.</p></div>
+      <div class="card persona"><span class="k">End user</span><h3>Parents</h3><p><b>Care about:</b> knowing their child is safe, and fast answers in their language.<br><b>Get:</b> WhatsApp messages. No new app to install.</p></div>
     </div>
   </div>
 
-  <div class="sub">
+  <div class="sub reveal">
     <h3>Why a school would choose this</h3>
     <div class="grid">
       <div class="card"><span class="k">Reach</span><h3>WhatsApp-first</h3><p>Parents already use it. Nothing to download, so adoption does not depend on a parent app.</p></div>
@@ -368,31 +489,7 @@ details .ans p+p{margin-top:8px}
     </div>
   </div>
 
-  <div class="sub">
-    <h3>What we will measure</h3>
-    <div class="tw"><table>
-      <thead><tr><th>Measure</th><th>Target for the pilot</th><th>Why it matters</th></tr></thead>
-      <tbody>
-        <tr><td>Gate scan to parent message</td><td>Under 30 seconds</td><td>Proves the safety promise</td></tr>
-        <tr><td>After-hours enquiries handled by AI</td><td>Measured from day one</td><td>Shows enquiries we would have lost</td></tr>
-        <tr><td>Arrival cases resolved before 8:15</td><td>Measured from day one</td><td>Shows the escalation ladder works</td></tr>
-        <tr><td>Office calls avoided</td><td>Measured from day one</td><td>Shows staff time returned</td></tr>
-        <tr><td>Fees paid within reminder window</td><td>Measured from day one</td><td>Shows cash-flow benefit</td></tr>
-      </tbody></table></div>
-  </div>
-
-  <div class="sub">
-    <h3>How we take it to market</h3>
-    <div class="steps">
-      <div class="step"><b>Pilot with one school</b><span>A Kandy school like the one in our story. Run one admissions season and one term of arrival alerts.</span></div>
-      <div class="step"><b>Publish the proof</b><span>Use the pilot numbers and a short video as the case study for the next school.</span></div>
-      <div class="step"><b>Ride the ad season</b><span>Pitch before admissions open. Facebook ads send parents straight into WhatsApp and the CRM.</span></div>
-      <div class="step"><b>Grow by referral</b><span>Principals talk to principals. Offer school groups one dashboard across branches.</span></div>
-    </div>
-    <p class="note"><b>Pricing idea to validate:</b> a monthly subscription based on student count, with WhatsApp, SMS and call costs passed through at cost, and a one-time setup fee for importing classes, guardians and students. No prices are set yet.</p>
-  </div>
-
-  <div class="sub">
+  <div class="sub reveal">
     <h3>How we compare</h3>
     <div class="tw"><table>
       <thead><tr><th>Alternative</th><th>Where it falls short</th><th>What SchoolLine adds</th></tr></thead>
@@ -402,57 +499,94 @@ details .ans p+p{margin-top:8px}
         <tr><td>School ERP or parent app</td><td>Parents must install and log in. Rarely handles calls or admissions</td><td>Works in apps parents already use, plus voice</td></tr>
       </tbody></table></div>
   </div>
+
+  <div class="sub reveal">
+    <h3>What we will measure in the pilot</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Measure</th><th>Target</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr><td>Gate scan to parent message</td><td>Under 30 seconds</td><td>Proves the safety promise</td></tr>
+        <tr><td>After-hours enquiries handled by AI</td><td>Measured from day one</td><td>Shows enquiries we would have lost</td></tr>
+        <tr><td>Arrival cases resolved before 8:15</td><td>Measured from day one</td><td>Shows the escalation ladder works</td></tr>
+        <tr><td>Office calls avoided</td><td>Measured from day one</td><td>Shows staff time returned</td></tr>
+        <tr><td>Fees paid within the reminder window</td><td>Measured from day one</td><td>Shows the cash-flow benefit</td></tr>
+      </tbody></table></div>
+  </div>
+
+  <div class="sub reveal">
+    <h3>Route to market</h3>
+    <div class="steps">
+      <div class="step"><i>Step 1</i><b>Pilot with one school</b><span>A Kandy school like the one in our story. One admissions season and one term of arrival alerts.</span></div>
+      <div class="step"><i>Step 2</i><b>Publish the proof</b><span>Pilot numbers and a short video become the case study for the next school.</span></div>
+      <div class="step"><i>Step 3</i><b>Ride the ad season</b><span>Pitch before admissions open. Facebook ads send parents straight into WhatsApp and the CRM.</span></div>
+      <div class="step"><i>Step 4</i><b>Grow by referral</b><span>Principals talk to principals. School groups get one dashboard across branches.</span></div>
+    </div>
+    <p class="note"><b>Pricing to validate:</b> a monthly subscription by student count, WhatsApp, SMS and call costs passed through at cost, and a one-time setup fee for importing classes, guardians and students. No prices are set yet; the pilot will tell us what schools value.</p>
+  </div>
 </section>
 
-<section id="qa">
-  <div class="sec-head"><span class="eyebrow">Q&amp;A</span><h2>Questions we expect from the judges</h2>
-  <p class="lede">Short, honest answers. Tap a question to open it.</p></div>
+<!-- ================= FAQ ================= -->
+<section class="block" id="faq">
+  <div class="sec-head reveal"><span class="eyebrow"><b>08</b> FAQ</span><h2>Questions <em>worth asking</em></h2>
+  <p class="lede">Short, honest answers about the product, AI safety, the demo and the business.</p></div>
   <div class="chips" id="qchips" role="group" aria-label="Filter questions"></div>
   <div class="qa" id="qa-list"></div>
 </section>
 
 </main>
-<div class="cta"><div class="in">
+
+<footer class="cta"><div class="in">
+  <p class="tag">Informed parents. Calmer staff. Safer children.</p>
   <h2>See SchoolLine AI at your school.</h2>
   <p>Book a private demo · demo@uniconnect.ai · 0117 687 587</p>
   <small>Team Data Dragons · SIPL × Uniconnect AI Hackathon 2026 · Finale 17 Nov 2026 · Powered by uniconnect</small>
-</div></div>
+</div></footer>
 
 <script>
-// ---------- Status board (edit this list as the build moves) ----------
-var STATUS = {built:"Built and tested", testing:"Built, final testing", planned:"Finale build", poc:"Future extension"};
+// Scroll a horizontal strip so the item shows, without touching the page's vertical scroll
+function hscroll(el, center){
+  if(!el) return; var box = el.parentElement; if(!box || box.scrollWidth <= box.clientWidth) return;
+  var l = el.getBoundingClientRect().left - box.getBoundingClientRect().left + box.scrollLeft, r = l + el.offsetWidth;
+  if(center) box.scrollLeft = l - (box.clientWidth - el.offsetWidth)/2;
+  else if(l < box.scrollLeft) box.scrollLeft = l - 8; else if(r > box.scrollLeft + box.clientWidth) box.scrollLeft = r - box.clientWidth + 8;
+}
+
+// ---------- Build status (edit as the build moves): live, testing, build, roadmap ----------
+var STATUS = {live:"Live & tested", testing:"Final testing", build:"Finale build", roadmap:"Roadmap"};
 var ITEMS = [
- {s:"built",a:"Fees",t:"Card payment link",d:"A new fee sends the parent a secure Stripe checkout link on WhatsApp and SMS. A test-card payment went through end to end."},
- {s:"built",a:"Fees",t:"Invoice marked Paid automatically",d:"The payment notice is checked, the invoice is found, and Status, Paid On date and Payment Reference are filled in."},
- {s:"built",a:"Fees",t:"7-day due reminder",d:"Every morning at 9:00 it finds fees due within 7 days, makes a fresh pay link, messages the parent and marks the reminder sent."},
- {s:"built",a:"CRM",t:"School data model",d:"Admission Enquiries, Guardians, Students, Classes, Attendance, Fees, Results, Student Concerns, Meetings, Notices, Parent Requests and Fee Reminders."},
- {s:"built",a:"AI agents",t:"Four AI agents",d:"SchoolLine Assistant, WhatsApp Chat Agent, Admissions Voice Agent and Fee Reminder Agent."},
- {s:"built",a:"Dashboards",t:"Six school dashboards",d:"Morning Safety Board, Admissions Funnel, Parent Communication, Fees, Staff Load and Student Wellbeing."},
- {s:"testing",a:"Fees",t:"2-day due reminder",d:"Second reminder is saved. It needs a fee due in two days to run its first real test."},
- {s:"testing",a:"Fees",t:"Fee reminder call campaigns",d:"An AI voice campaign and a live-agent campaign are running with retries. The full call flow is still being tested."},
- {s:"testing",a:"Safe arrival",t:"Gate check-in webhook",d:"Accepts admission number, scan time, gate and device. Test calls for an on-time scan and a late 08:18 scan are ready."},
- {s:"testing",a:"AI agents",t:"Admissions fee knowledge",d:"A sample Grade 6 fee and admission document is ready for the assistant. The numbers are placeholders."},
- {s:"planned",a:"Admissions",t:"WhatsApp router and new enquiry",d:"One workflow decides what each incoming message is, creates the enquiry and tags a Facebook ad source."},
- {s:"planned",a:"Admissions",t:"Hotline with AI after-hours answer",d:"IVR in three languages, admissions queue, and an AI voice agent when no staff are logged in."},
- {s:"planned",a:"Admissions",t:"Documents on WhatsApp",d:"Photos and PDFs from the parent land on the right field of the enquiry, with a reply listing what is still missing."},
- {s:"planned",a:"Admissions",t:"Offer, payment ladder, enrolment",d:"Offer letter, reminders and a call until paid, then guardian and student records are created and linked."},
- {s:"planned",a:"Safe arrival",t:"Arrival sweeps and reply reader",d:"Checks at 7:30, 7:45 and 8:00. An AI reader understands replies like \"2, bus broke down\" in three languages."},
- {s:"planned",a:"Safe arrival",t:"AI call and duty-teacher transfer",d:"Safe Arrival Caller rings the parent, then transfers to the Duty Teachers ring group and conferences in the class teacher."},
- {s:"planned",a:"Progress",t:"Results, concerns and meetings",d:"Imported marks become a personal AI summary. A teacher concern leads to a phone parent-teacher meeting with a saved summary."},
- {s:"planned",a:"Principal",t:"Principal's AI assistant",d:"The principal asks questions of the live data through the Uniconnect MCP server."},
- {s:"poc",a:"Integrations",t:"Facebook lead capture",d:"Ad leads flow into the CRM automatically. Built in code, ships in a later release. The demo uses a pre-filled ad message."},
- {s:"poc",a:"Integrations",t:"LMS and biometric devices",d:"Homework and grade alerts from Moodle or Google Classroom, and RFID gate devices. Shown as a roadmap item."}
+ {s:"live",a:"Fees",t:"Card payment link",d:"A new fee sends the parent a secure Stripe checkout link on WhatsApp and SMS. A test-card payment went through end to end."},
+ {s:"live",a:"Fees",t:"Invoice marked Paid automatically",d:"The payment notice is checked, the invoice is found, and Status, Paid On date and Payment Reference are filled in."},
+ {s:"live",a:"Fees",t:"7-day due reminder",d:"Every morning at 9:00 it finds fees due within 7 days, makes a fresh pay link, messages the parent and marks the reminder sent."},
+ {s:"live",a:"CRM",t:"School data model",d:"12 linked modules: Admission Enquiries, Guardians, Students, Classes, Attendance, Fees, Results, Student Concerns, Meetings, Notices, Parent Requests and Fee Reminders."},
+ {s:"live",a:"Access",t:"Roles, layouts and saved views",d:"8 roles with All / Group / Own access, field locks, role layouts and 25 saved views."},
+ {s:"live",a:"AI agents",t:"Five AI agents",d:"SchoolLine Assistant, WhatsApp Chat Agent, Admissions Voice Agent, Fee Reminder Agent and the Message Reader."},
+ {s:"live",a:"Dashboards",t:"Six school dashboards",d:"Morning Safety Board, Admissions Funnel, Parent Communication, Fees, Staff Load and Student Wellbeing, shared by role."},
+ {s:"live",a:"Admissions",t:"WhatsApp router and new enquiry",d:"One workflow decides what each message is, creates the enquiry, tags a Facebook ad source and fills in the child's details from the chat."},
+ {s:"live",a:"Admissions",t:"AI hotline books the visit",d:"The Admissions Voice Agent answers, saves a call summary and visit time, and a confirmation goes out on WhatsApp and SMS."},
+ {s:"live",a:"Admissions",t:"Enrolment",d:"Payment confirmed creates or matches the guardian and student, picks a class with free seats, sends a welcome message and raises the Term 1 fee."},
+ {s:"testing",a:"Admissions",t:"Offer letter and payment ladder",d:"Offer on WhatsApp, reminders and a call until paid, and the payment webhook moves the enquiry to Payment confirmed."},
+ {s:"testing",a:"Fees",t:"2-day due reminder",d:"The second reminder is saved and runs when a fee is two days from its due date."},
+ {s:"testing",a:"Fees",t:"Fee reminder call campaigns",d:"An AI voice campaign and a live-agent campaign with retries."},
+ {s:"testing",a:"Safe arrival",t:"Gate check-in",d:"A gate scan updates the morning record and sends \"checked in at 8:18 AM\" to the parent."},
+ {s:"testing",a:"Safe arrival",t:"Arrival check and reply reader",d:"Creates Not arrived records, messages the parent, and AI reads replies like \"2, bus broke down\" in three languages."},
+ {s:"testing",a:"Progress",t:"Results summary and teacher concerns",d:"Imported marks become a personal summary (\"Maths up 14 marks to 78\"). A teacher concern sends a gentle note to the parent."},
+ {s:"build",a:"Admissions",t:"Documents on WhatsApp",d:"Photos and PDFs land on the right field of the enquiry, with a reply listing what is still missing."},
+ {s:"build",a:"Safe arrival",t:"AI call and duty-teacher transfer",d:"Safe Arrival Caller rings the parent, then transfers to the Duty Teachers ring group and conferences in the class teacher."},
+ {s:"build",a:"Principal",t:"Principal's AI assistant",d:"The principal asks questions of live data through the Uniconnect MCP server."},
+ {s:"build",a:"Everyday",t:"Notices in three languages and Friday digest",d:"Staff write once in English; AI translates for review; each parent gets their language."},
+ {s:"roadmap",a:"Integrations",t:"Facebook lead capture",d:"Ad leads flow into the CRM automatically. Built in code, ships in a later release."},
+ {s:"roadmap",a:"Integrations",t:"LMS and biometric devices",d:"Homework and grade alerts from Moodle or Google Classroom, and RFID gate devices."}
 ];
 var cur = "all";
 function renderStatus(){
-  var chips = document.getElementById("chips"), list = document.getElementById("status-list");
-  var keys = ["all","built","testing","planned","poc"], html = "";
-  keys.forEach(function(k){
-    var n = k==="all" ? ITEMS.length : ITEMS.filter(function(i){return i.s===k}).length;
-    html += '<button class="chip" type="button" data-k="'+k+'" aria-pressed="'+(cur===k)+'">'+(k==="all"?"All":STATUS[k])+' · '+n+'</button>';
-  });
-  chips.innerHTML = html;
-  list.innerHTML = ITEMS.filter(function(i){return cur==="all"||i.s===cur}).map(function(i){
+  var keys = ["live","testing","build","roadmap"], total = ITEMS.length;
+  var count = function(k){ return ITEMS.filter(function(i){return i.s===k}).length; };
+  document.getElementById("meter").innerHTML = keys.map(function(k){ return '<i class="m-'+k+'" style="width:'+(count(k)/total*100)+'%"></i>'; }).join("");
+  document.getElementById("meter-legend").innerHTML = keys.map(function(k){ return '<span><span class="badge b-'+k+'">'+count(k)+'</span> '+STATUS[k]+'</span>'; }).join("");
+  document.getElementById("chips").innerHTML = ["all"].concat(keys).map(function(k){
+    return '<button class="chip" type="button" data-k="'+k+'" aria-pressed="'+(cur===k)+'">'+(k==="all"?"All":STATUS[k])+' · '+(k==="all"?total:count(k))+'</button>';
+  }).join("");
+  document.getElementById("status-list").innerHTML = ITEMS.filter(function(i){return cur==="all"||i.s===cur}).map(function(i){
     return '<div class="item"><div class="top"><span class="area">'+i.a+'</span><span class="badge b-'+i.s+'">'+STATUS[i.s]+'</span></div><h3>'+i.t+'</h3><p>'+i.d+'</p></div>';
   }).join("");
 }
@@ -462,111 +596,272 @@ document.getElementById("chips").addEventListener("click", function(e){
 
 // ---------- Demo scenes ----------
 var SCENES = [
- {t:"0:00",n:"Opening video",kind:"Video · about 60 s",who:"Not live",title:"The night-time worry",
-  see:["Night in the family kitchen. Sunil and Kumari talk about a good Grade 6 school.","Kumari asks: \"How will we even know she reached school?\"","Sunil sees the school's Facebook ad and taps Send WhatsApp message.","The video cuts to the live screen as he presses Send."],
-  behind:[["The school does not provide transport. Travel shows up only in the video.",""],["The Facebook ad shows only in the video.",""]],
-  fb:"Video is saved on the presentation laptop."},
- {t:"1:00",n:"1 · WhatsApp enquiry",kind:"Live · 1 min 30 s",who:"Phone A: Kumari (Channels owner)",title:"The father's WhatsApp enquiry",
-  see:["Phone A sends the ad's pre-filled text: \"Hi, I'd like details on Grade 6 admission 2027.\"","An instant reply in Sinhala with the prospectus PDF. The assistant asks the child's name, school and home town.","He asks \"How will we know she reached school safely?\" The assistant explains arrival alerts and the duty-teacher follow-up.","A new Admission Enquiry appears in the CRM, source Facebook Ad, assigned to Admissions."],
-  behind:[["WhatsApp router + new enquiry workflow","planned"],["SchoolLine Assistant + knowledge","built"],["Detail extraction from chat","planned"],["Unified Inbox shows the conversation","built"]],
-  fb:"Show the recording of this scene, then open the enquiry."},
- {t:"2:30",n:"2 · 9 PM hotline",kind:"Live · 2 min",who:"Phone A calls · Telephony owner",title:"No staff, and the AI answers",
-  see:["Kumari calls the hotline and picks Admissions in the IVR menu.","Nobody is logged in to the queue. After 15 seconds the AI voice agent answers.","It already knows them from the WhatsApp enquiry. It answers fees, hours and attendance policy, and books a Saturday 10 AM visit.","The call summary lands on the enquiry, the stage becomes Visit booked, and a WhatsApp confirmation arrives."],
-  behind:[["Hotline IVR and queue overflow to AI","planned"],["Admissions Voice Agent with caller lookup","built"],["Recording, transcript, AI summary","built"],["Supervisor whisper to the officer (optional beat)","built"]],
-  fb:"Play the recorded call and show the summary on the enquiry."},
- {t:"4:30",n:"3 · Documents",kind:"Live · 1 min",who:"Phone A",title:"Documents sent on WhatsApp",
-  see:["Kumari sends photos of the birth certificate, Grade 5 report and scholarship sheet.","Each file lands on the enquiry. Reply: \"Received 3 of 4. Still needed: a passport-size photo.\"","She sends the photo. The stage changes to Docs complete and the officer is notified."],
-  behind:[["Document intake workflow","planned"],["Media fields on the enquiry",""]],
-  fb:"In the 6-minute version send one document only."},
- {t:"5:30",n:"4 · Offer and payment",kind:"Live · 1 min 15 s",who:"Phone A · CRM owner as Accounts",title:"Offer letter, then paying the fee",
-  see:["The officer approves. The offer letter and invoice arrive on WhatsApp and email.","Time is compressed: a reminder, then an AI reminder call to Phone A.","Kumari taps the secure pay link and pays with a Stripe test card. The invoice turns Paid by itself.","The bank-slip route is the backup: she photographs a slip and Accounts confirms."],
-  behind:[["Card payment link and auto-Paid update","built"],["Due reminders and call campaigns","testing"],["Offer letter workflow","planned"]],
-  fb:"Test card 4242 4242 4242 4242. If the checkout page is slow, switch to the bank-slip route."},
- {t:"6:45",n:"5 · Enrolment",kind:"Live · 45 s",who:"CRM owner",title:"The enquiry becomes a student",
-  see:["The moment Accounts confirms, linked Guardian and Student records appear in class 6B.","A welcome pack arrives on WhatsApp: class teacher, timetable, gate time 7:30 AM, how arrival alerts work.","Line for the judges: \"Nobody re-typed anything. The enquiry became the student.\""],
-  behind:[["Enrolment workflow","planned"],["Linked CRM modules for guardian, student and fees","built"]],
-  fb:"Show the Student record created earlier in rehearsal."},
- {t:"7:30",n:"6 · A late morning",kind:"Live · 1 min 45 s",who:"Phone A + a judge's phone",title:"The parent checks, the school handles it",
-  see:["7:30 cutoff. Dinithi has not scanned in. Kumari gets a check message: 1 absent, 2 late, 3 call me.","She replies \"2, the bus broke down near Gampola.\" The record shows Running late, expected 8:20.","At 8:05 she asks \"Has she reached yet?\" The assistant reads today's record and answers.","At 8:18 the QR scan at the gate sends \"checked in at 8:18 AM\" and the safety board turns green.","A judge's phone plays another parent: no reply, AI call, unsure, transfer to the duty teacher."],
-  behind:[["Gate check-in webhook","testing"],["Arrival sweeps and reply reader","planned"],["AI call and duty-teacher transfer","planned"],["SMS fallback if WhatsApp fails","planned"]],
-  fb:"Skip the judge-phone escalation in the short version. Fire the late-scan test call from Postman if the gate form fails."},
- {t:"9:15",n:"7 · Through the term",kind:"Live · quick cuts",who:"Phone A",title:"Fees, marks and teacher concerns",
-  see:["Term 2 fee reminder arrives with a pay link.","Results are imported. Kumari gets \"Maths up 14 marks to 78. English reading needs practice.\"","A teacher logs a concern. A gentle message goes to the parents and a phone parent-teacher meeting is booked."],
-  behind:[["Fee reminders and pay links","built"],["Results release, concerns, meetings","planned"]],
-  fb:"Show as one slide in the 6-minute version."},
- {t:"10:00",n:"8 · Dashboards + close",kind:"Live then video · 1 min",who:"Presenter as Principal",title:"The principal's view, and the closing video",
-  see:["Admissions funnel, morning safety board, communications, fees and staff load.","Optional: the principal asks an AI assistant \"Which Grade 6 students were late 3 times this month?\"","Closing video: the same kitchen, now calm. Sunil reads Friday's digest: \"Arrived on time all week.\""],
-  behind:[["Six dashboards","built"],["Principal's AI assistant","planned"]],
-  fb:"Dashboards update live in rehearsal. If not, use screenshots."}
+ {t:"0:00",n:"Opening video",kind:"Video · about 60 s",title:"The night-time worry",
+  see:["Night in the family kitchen. Sunil and Kumari talk about a good Grade 6 school.","Kumari asks: <em>\"How will we even know she reached school?\"</em>","Sunil sees the school's Facebook ad and taps Send WhatsApp message.","The video cuts to the live screen as he presses Send."],
+  behind:[["Story only. The school does not provide transport, so travel appears only in the video.",""]]},
+ {t:"1:00",n:"WhatsApp enquiry",kind:"Live · 1 min 30 s",title:"The father's WhatsApp enquiry",
+  see:["Phone A sends the ad's pre-filled text: <em>\"Hi, I'd like details on Grade 6 admission 2027.\"</em>","An instant reply. The assistant asks the child's name, school and home town.","He asks <em>\"How will we know she reached school safely?\"</em> The assistant explains arrival alerts and the duty-teacher follow-up.","A new Admission Enquiry appears in the CRM, source Facebook Ad, assigned to Admissions."],
+  behind:[["WhatsApp router + new enquiry","live"],["SchoolLine Assistant","live"],["Detail capture by the Message Reader","live"],["Unified Inbox shows the conversation","live"]]},
+ {t:"2:30",n:"9 PM hotline",kind:"Live · 2 min",title:"No staff on duty, and the AI answers",
+  see:["Kumari calls the hotline and picks Admissions in the menu.","Nobody is in the queue. After 15 seconds the AI voice agent answers.","It knows them from the WhatsApp enquiry, answers fees, hours and attendance policy, and books a Saturday 10 AM visit.","The call summary lands on the enquiry, the stage becomes Visit booked, and a confirmation arrives on WhatsApp."],
+  behind:[["Admissions Voice Agent with caller lookup","live"],["Recording, transcript, AI summary","live"],["Visit-booked confirmation workflow","live"],["Supervisor whisper to the officer","live"]]},
+ {t:"4:30",n:"Documents",kind:"Live · 1 min",title:"Documents sent on WhatsApp",
+  see:["Kumari sends photos of the birth certificate, Grade 5 report and scholarship sheet.","Each file lands on the enquiry. Reply: <em>\"Received 3 of 4. Still needed: a passport-size photo.\"</em>","She sends the photo. The stage changes to Docs complete and the officer is notified."],
+  behind:[["Document intake workflow","build"],["File fields on the enquiry","live"]]},
+ {t:"5:30",n:"Offer and payment",kind:"Live · 1 min 15 s",title:"Offer letter, then paying the fee",
+  see:["The officer approves. The offer letter and invoice arrive on WhatsApp and email.","Time is compressed: a reminder, then an AI reminder call to Phone A.","Kumari taps the secure pay link and pays by card. The invoice turns Paid by itself.","Backup route for families without cards: photograph a bank slip and Accounts confirms."],
+  behind:[["Card payment link and auto-Paid update","live"],["Offer letter and payment ladder","testing"],["Reminder call campaigns","testing"]]},
+ {t:"6:45",n:"Enrolment",kind:"Live · 45 s",title:"The enquiry becomes a student",
+  see:["The moment payment is confirmed, linked Guardian and Student records appear in Grade 6.","A welcome message arrives: class, gate time 7:30 AM, how arrival alerts work.","The Term 1 fee is raised and its pay link goes out automatically.","<em>\"Nobody re-typed anything. The enquiry became the student.\"</em>"],
+  behind:[["Enrolment workflow","live"],["Linked guardian, student and fee records","live"]]},
+ {t:"7:30",n:"A late morning",kind:"Live · 1 min 45 s",title:"The parent checks, the school handles it",
+  see:["7:30 cutoff. Dinithi has not scanned in. Kumari gets a check message: 1 absent, 2 late, 3 call me.","She replies <em>\"2, the bus broke down near Gampola.\"</em> The record shows Running late, expected 8:20.","At 8:05 she asks <em>\"Has she reached yet?\"</em> The assistant reads today's record and answers.","At 8:18 the QR scan at the gate sends \"checked in at 8:18 AM\" and the safety board turns green.","A second phone plays another parent: no reply, AI call, unsure, transfer to the duty teacher."],
+  behind:[["Gate check-in webhook","testing"],["Arrival check and reply reader","testing"],["AI call and duty-teacher transfer","build"],["SMS fallback if WhatsApp fails","build"]]},
+ {t:"9:15",n:"Through the term",kind:"Live · quick cuts",title:"Fees, marks and teacher concerns",
+  see:["Term 2 fee reminder arrives with a pay link.","Results are imported. Kumari gets <em>\"Maths up 14 marks to 78. English: reading needs practice.\"</em>","A teacher logs a concern. A gentle message goes to the parents and a phone parent-teacher meeting is booked."],
+  behind:[["Fee reminders and pay links","live"],["Results summary and concern note","testing"],["Phone meeting by conference call","build"]]},
+ {t:"10:00",n:"Principal + close",kind:"Live then video · 1 min",title:"The principal's view, and the closing video",
+  see:["Admissions funnel, morning safety board, communications, fees and staff load, live.","The principal asks an AI assistant: <em>\"Which Grade 6 students were late 3 times this month?\"</em>","Closing video: the same kitchen, now calm. Sunil reads Friday's digest: <em>\"Arrived on time all week.\"</em>"],
+  behind:[["Six dashboards","live"],["Principal's AI assistant (MCP)","build"]]}
 ];
 var sel = 1;
 function renderScenes(){
   document.getElementById("scenes").innerHTML = SCENES.map(function(s,i){
-    return '<button class="scene-btn" role="tab" type="button" data-i="'+i+'" aria-selected="'+(i===sel)+'"><span class="t">'+s.t+'</span><span class="n">'+s.n+'</span></button>';
+    return '<button class="scene-btn" role="tab" type="button" data-i="'+i+'" aria-selected="'+(i===sel)+'"><span class="t">'+s.t+'</span><span class="n">'+(i>0?i+' · ':'')+s.n+'</span></button>';
   }).join("");
   var s = SCENES[sel];
   document.getElementById("scene-panel").innerHTML =
-   '<div class="meta"><span class="pill">'+s.kind+'</span><span class="pill">'+s.who+'</span></div>'+
-   '<h3 style="font-size:1.5rem">'+s.title+'</h3>'+
-   '<div class="cols2"><div><h4>What judges see</h4><ul>'+s.see.map(function(x){return '<li>'+x+'</li>'}).join("")+'</ul></div>'+
-   '<div><h4>What runs behind it</h4><ul>'+s.behind.map(function(b){return '<li>'+b[0]+(b[1]?'<span class="badge b-'+b[1]+'">'+STATUS[b[1]]+'</span>':'')+'</li>'}).join("")+'</ul></div></div>'+
-   '<div class="fallback"><b>Fallback:</b> '+s.fb+'</div>';
+   '<div class="meta"><span class="pill">'+s.kind+'</span><span class="pill">Starts at '+s.t+'</span></div>'+
+   '<h3 style="font-size:1.6rem;letter-spacing:-.02em">'+s.title+'</h3>'+
+   '<div class="cols2"><div><h4>What you will see</h4><ul>'+s.see.map(function(x){return '<li>'+x+'</li>'}).join("")+'</ul></div>'+
+   '<div><h4>What powers it</h4><ul class="pw">'+s.behind.map(function(b){return '<li><span>'+b[0]+'</span>'+(b[1]?'<span class="badge b-'+b[1]+'">'+STATUS[b[1]]+'</span>':'')+'</li>'}).join("")+'</ul></div></div>'+
+   '<div class="nav-sc"><button type="button" data-step="-1"'+(sel===0?' disabled':'')+'>← Previous scene</button><button type="button" data-step="1"'+(sel===SCENES.length-1?' disabled':'')+'>Next scene →</button></div>';
 }
 document.getElementById("scenes").addEventListener("click", function(e){
   var b = e.target.closest("button"); if(!b) return; sel = +b.dataset.i; renderScenes();
 });
-
-// ---------- Pre-show checklist (ticks stay in this browser only) ----------
-var CHECKS = [
- "Site health check 30 minutes before. The server stopped responding for a while on 16 Nov.",
- "WhatsApp Chat Agent answers a test message. Re-check its AI model setting.",
- "Phone A has messaged the business number in the last 24 hours, so text replies are allowed.",
- "Create a fresh demo fee. Pay link arrives, test-card payment marks it Paid.",
- "Remove old test fees and test enquiries. Reset today's attendance.",
- "Replace sample fee figures, or tell the judges they are samples.",
- "Gate webhook returns OK for an on-time and a late scan, message under 30 seconds.",
- "Hotline test call reaches the AI when no one is in the queue.",
- "A second phone is ready for the judge escalation.",
- "Browser tabs open: Inbox, Enquiry, Student, Fees, Safety Board.",
- "Backup recording of every live scene is on the presentation laptop."
-];
-var done = {};
-try { done = JSON.parse(localStorage.getItem("sl-checks") || "{}"); } catch(e) { done = {}; }
-function renderChecks(){
-  document.getElementById("checks").innerHTML = CHECKS.map(function(c,i){
-    return '<label class="check"><input type="checkbox" data-i="'+i+'"'+(done[i]?' checked':'')+'><span>'+c+'</span></label>';
-  }).join("");
-  progress();
-}
-function progress(){
-  var n = CHECKS.filter(function(_,i){return done[i]}).length;
-  document.getElementById("prog").textContent = n+" of "+CHECKS.length+" done";
-  document.getElementById("bar").style.width = (n/CHECKS.length*100)+"%";
-}
-document.getElementById("checks").addEventListener("change", function(e){
-  var i = e.target.dataset.i; if(i===undefined) return; done[i] = e.target.checked;
-  try { localStorage.setItem("sl-checks", JSON.stringify(done)); } catch(err) {}
-  progress();
+document.getElementById("scene-panel").addEventListener("click", function(e){
+  var b = e.target.closest("button[data-step]"); if(!b) return;
+  sel = Math.max(0, Math.min(SCENES.length-1, sel + (+b.dataset.step))); renderScenes();
+  hscroll(document.querySelector('.scene-btn[aria-selected="true"]'));
 });
 
-// ---------- Q&A ----------
+// ---------- CRM modules (blueprint) ----------
+var MODULES = [
+ {n:"Admission Enquiries",d:"Built-in Leads, relabelled. Every WhatsApp, hotline and ad enquiry, from first message to enrolment.",f:[
+  ["Enquiry No","Auto-number","ADM-0001"],["Parent name","Text","Required"],["Mobile (WhatsApp)","Phone","Required, unique. Identifies the parent on chat and calls"],
+  ["Relationship","Choice","Mother · Father · Guardian"],["Language","Choice","Sinhala · Tamil · English"],["Child's name","Text",""],["Child's date of birth","Date",""],
+  ["Applying for","Choice","Grade 1 … Grade 13"],["Current school","Text",""],["Home town","Text",""],["Grade 5 scholarship marks","Number","Optional"],
+  ["Source","Choice","Facebook Ad · WhatsApp · Hotline · Website chat · Walk-in · Referral"],["Ad / campaign code","Text","Set from the ad's pre-filled message"],
+  ["Admission stage","Choice","New enquiry → Contacted → Visit booked → Visited → Docs pending → Docs complete → Offer sent → Payment pending → Slip received → Payment confirmed → Enrolled · Lost"],
+  ["School visit","Date-time","Colour-coded by how soon"],["AI call summary","Rich text","Written after each hotline call"],
+  ["Birth certificate · report card · scholarship result · photo","Files","Saved from WhatsApp"],["Documents","Choice","None · Partial · Complete"],
+  ["Admission fee (LKR)","Decimal","From the fee policy"],["Bank slip","File","Backup payment route"],["Payment reference","Text","Accounts only"],
+  ["Verified by","Link → Users",""],["Reminders sent","Number","Counted by the payment ladder"],["Lost reason","Text","Required when stage is Lost"],
+  ["Student · Guardian","Links","Set automatically at enrolment"]]},
+ {n:"Guardians",d:"The identity record the chat and voice agents use to recognise a parent. One guardian, several children.",f:[
+  ["Guardian No","Auto-number","GRD-0001"],["Full name","Text","Required"],["Mobile (WhatsApp)","Phone","Required, unique. Agent lookup key"],["Second mobile","Phone",""],
+  ["Email","Email",""],["Relationship","Choice","Mother · Father · Guardian"],["Language","Choice","Sinhala · Tamil · English"],["Preferred channel","Choice","WhatsApp · SMS · Call"],
+  ["WhatsApp opt-in","Yes / No","Default yes"],["No promotions","Yes / No","Safety and fee messages still go"],["Home town","Text",""],
+  ["Children","Link → Students","Many-to-many"],["From enquiry","Link → Enquiries",""]]},
+ {n:"Students",d:"One record per child, linked to class, guardians and everything that happens through the year.",f:[
+  ["Admission No","Auto-number","Unique. Printed as the QR code on the ID card"],["Full name","Text","Required"],["Date of birth","Date",""],["Gender","Choice",""],
+  ["Grade","Choice","Drives the Class dropdown"],["Class","Link → Classes",""],["Primary guardian","Link → Guardians","Receives all alerts"],["All guardians","Link → Guardians","Many-to-many"],
+  ["Status","Choice","Active · Left · Suspended"],["Admission date","Date",""],["How she travels","Choice","Information only. The school does not provide transport"],
+  ["Photo","File","From the enquiry"],["Health note","Rich text","Principal, class teacher and counsellor only"],["Late / absent (30 days)","Number","Updated weekly"],
+  ["Open concerns","Number",""],["From enquiry","Link → Enquiries","One-to-one"]]},
+ {n:"Classes",d:"Class teacher, check-in cutoff and capacity. Enrolment uses capacity to place a new student.",f:[
+  ["Class code","Text","Unique, e.g. 6B-2027"],["Grade","Choice",""],["Section","Choice","A · B · C"],["Year","Number",""],
+  ["Class teacher","Link → Users","Owns the class's attendance and concerns"],["Check-in cutoff","Text","07:30"],["School days","Multi-choice","Mon–Fri"],
+  ["Capacity","Number","Used to pick a class at enrolment"],["Students","Link → Students","One-to-many"]]},
+ {n:"Attendance",d:"One record per student per day, created when something happens: a check-in, a missed cutoff, or a parent's message.",f:[
+  ["Student","Link → Students","Required"],["Guardian","Link → Guardians","Copied from the primary guardian"],["Class","Link → Classes",""],["Date","Date","Required"],
+  ["Status","Choice","On time · Late check-in · Not arrived · Running late · Absent · Absent (informed)"],["Check-in time","Date-time",""],
+  ["Source","Choice","Gate QR · Office tap · Parent message · Teacher"],["Parent notified","Choice","Not sent · Sent · Delivered · Failed · SMS fallback"],
+  ["Last message ID","Text","Links delivery events back to this record"],["Parent response","Choice","None · Absent · Running late · Call me"],
+  ["Reason","Choice","Sick · Transport delay · Family matter · Unknown · Other"],["Parent's words","Rich text",""],["Expected arrival","Text","From the reply reader"],
+  ["Escalation","Choice","0 None · 1 WhatsApp · 2 AI call · 3 Duty teacher · 4 Resolved"],["AI call summary","Rich text",""],["Resolved by","Link → Users",""]]},
+ {n:"Fees",d:"Every invoice with its pay link, reminders and proof of payment.",f:[
+  ["Invoice No","Auto-number","INV-0001"],["Student","Link → Students",""],["Bill to","Link → Guardians",""],["Fee type","Choice","Admission · Term · Exam · Activity"],
+  ["Term","Choice","Term 1 · Term 2 · Term 3"],["Amount (LKR)","Decimal","Required"],["Due date","Date","Amber before due, red after"],
+  ["Status","Choice","Due · Overdue · Slip received · Paid · Waived"],["Days overdue","Calculated","Today minus due date while unpaid"],
+  ["Pay link","URL","Fresh Stripe checkout link for each reminder"],["Reminders sent","Number",""],["Bank slip","File",""],
+  ["Payment reference","Text","Filled from the payment notice"],["Paid on","Date","Filled from the payment notice"],["Verified by","Link → Users",""]]},
+ {n:"Results",d:"One row per student, exam and subject, bulk-imported from the marks sheet.",f:[
+  ["Student","Link → Students",""],["Exam","Choice","Term 1 · Term 2 · Term 3 · Monthly test"],["Subject","Choice","Sinhala/Tamil · English · Maths · Science · History · Religion · ICT …"],
+  ["Marks","Number","0–100"],["Previous marks","Number","From the import"],["Change","Calculated","Marks minus previous marks"],["Grade","Choice","A · B · C · S · W"],
+  ["Teacher comment","Text",""],["Parent summary","Rich text","Written by AI in the parent's language"],["Sent","Yes / No",""]]},
+ {n:"Student Concerns",d:"Improvement issues raised by teachers, or automatically by the attendance early warning.",f:[
+  ["Student","Link → Students",""],["Raised by","Link → Users",""],["Category","Choice","Academic · Homework · Behaviour · Attendance · Wellbeing"],
+  ["What we noticed","Rich text","Hidden from Office and Accounts"],["Severity","Choice","Low · Medium · High"],
+  ["Status","Choice","Open · Parent informed · Meeting booked · Action plan · Closed"],["Message to parent","Rich text","AI draft, teacher can edit"],
+  ["Meeting","Link → Meetings",""],["Action plan","Rich text","From the meeting summary"],["Review on","Date",""]]},
+ {n:"Meetings",d:"Parent-teacher meetings, usually a phone conference so a parent working away can join.",f:[
+  ["Student","Link → Students",""],["Guardian","Link → Guardians",""],["Also invite","Phone","Added to the conference"],["Teacher","Link → Users",""],
+  ["When","Date-time",""],["Type","Choice","Phone conference · In person · Admission visit"],["Status","Choice","Scheduled · Done · Missed · Rescheduled"],
+  ["AI summary","Rich text",""],["Next steps","Rich text",""]]},
+ {n:"Notices",d:"Written once in English, translated by AI, reviewed by a person, sent in each parent's language.",f:[
+  ["Title","Text","Required"],["English","Rich text","Written by staff"],["Sinhala","Rich text","AI translation, reviewed"],["Tamil","Rich text","AI translation, reviewed"],
+  ["Audience","Choice","All · Grade · Class"],["Grades","Multi-choice","Shown when audience is Grade"],["Class","Link → Classes","Shown when audience is Class"],
+  ["Event date","Date",""],["Attachment","File",""],["Status","Choice","Draft · Translate · Ready · Sent"],["Sent to","Number",""]]},
+ {n:"Parent Requests",d:"Anything the AI hands to a person, with the full context and a reply-by time.",f:[
+  ["Request No","Auto-number","REQ-0001"],["Guardian","Link → Guardians",""],["Student","Link → Students",""],["Channel","Choice","WhatsApp · Hotline · AI hand-off · Web chat · Email"],
+  ["Category","Choice","Admissions · Fees · Attendance · Results · Safety · Other"],["Priority","Choice","Normal · High (High = safety)"],["Question","Rich text",""],
+  ["AI summary","Rich text","From the chat or call"],["Status","Choice","New · In progress · Waiting for parent · Resolved"],
+  ["Reply by","Date-time","High = 15 min, Normal = 4 h"],["Resolution","Rich text",""]]},
+ {n:"Fee Reminders",d:"One row per reminder call. Feeds the AI voice and live-agent fee campaigns, with retries.",f:[]}
+];
+document.getElementById("mods").innerHTML = MODULES.map(function(m,i){
+  var body = m.f.length
+    ? '<div class="tw"><table><thead><tr><th>Field</th><th>Type</th><th>Rules and notes</th></tr></thead><tbody>'+m.f.map(function(r){return '<tr><td>'+r[0]+'</td><td class="nw">'+r[1]+'</td><td>'+r[2]+'</td></tr>'}).join("")+'</tbody></table></div>'
+    : '<div class="pad">Queue module for call campaigns: each due or overdue fee becomes a reminder row the AI and live-agent campaigns dial, with retries and outcomes saved.</div>';
+  return '<details class="acc"><summary><span class="mn">M'+(i+1)+'</span><span class="tt"><b>'+m.n+'</b><span>'+m.d+'</span></span>'+(m.f.length?'<span class="fc">'+m.f.length+' fields</span>':'')+'</summary><div class="body">'+body+'</div></details>';
+}).join("");
+
+// ---------- Permission matrix ----------
+var MATRIX = [
+ ["Admission Enquiries","All · CVED","All · CVE","All · V","All · VE","—","—","All · CVE"],
+ ["Guardians","All · CVED","All · CVE","All · CVE","All · V","Group · V","All · V","All · V"],
+ ["Students","All · CVED","All · CV","All · VE","All · V","Group · VE","All · V","All · V"],
+ ["Classes","All · CVED","All · V","All · V","—","Own · V","All · V","All · V"],
+ ["Attendance","All · CVED","—","All · CVE","—","Group · CVE","All · V","All · CVE"],
+ ["Fees","All · CVED","All · V","All · V","All · CVED","—","—","All · VE"],
+ ["Results","All · CVED","—","All · V","—","Group · CVE","All · V","All · C"],
+ ["Student Concerns","All · CVED","—","—","—","Own · CVE","All · CVE","—"],
+ ["Meetings","All · CVED","All · CVE","All · V","—","Own · CVE","All · CVE","—"],
+ ["Notices","All · CVED","—","All · CVE","—","Group · CV","—","—"],
+ ["Parent Requests","All · CVED","Group · CVE","Group · CVE","Group · CVE","Own · VE","Own · VE","All · C"]
+];
+document.getElementById("matrix").innerHTML = MATRIX.map(function(r){
+  return '<tr>'+r.map(function(c,i){ return i===0 ? '<td>'+c+'</td>' : '<td class="'+(c==="—"?"no":"all")+'">'+c+'</td>'; }).join("")+'</tr>';
+}).join("");
+
+// ---------- WhatsApp templates ----------
+var TEMPLATES = [
+ ["visit_confirmation","Your school visit is booked: date and time","WF-02"],
+ ["docs_reminder","Which admission documents are still missing","WF-03"],
+ ["offer_letter","The offer letter (PDF), amount and due date","WF-04"],
+ ["admission_payment_reminder","Seat held until a date, with the pay link","WF-05"],
+ ["slip_received","We received your bank slip","WF-06"],
+ ["welcome_pack","Class, teacher, gate time, how arrival alerts work","WF-07"],
+ ["arrived","Your child checked in at a time","WF-08"],
+ ["not_arrived_check","Not checked in yet: reply 1, 2 or 3","WF-10"],
+ ["fee_reminder","Fee, amount, due date and pay link","WF-13"],
+ ["fee_receipt","Payment received, with the reference","WF-14"],
+ ["results_ready","A short personal summary of the results","WF-15"],
+ ["teacher_note","A gentle note from the class teacher","WF-16"],
+ ["meeting_invite","Phone meeting with the teacher: date and time","WF-16, WF-17"],
+ ["school_notice","A school notice in the parent's language","WF-18"],
+ ["weekly_digest","The week in one message: attendance, fees, what's next","WF-19"]
+];
+document.getElementById("templates").innerHTML = TEMPLATES.map(function(t){
+  return '<tr><td><code>'+t[0]+'</code></td><td>'+t[1]+'</td><td class="nw">'+t[2]+'</td></tr>';
+}).join("");
+
+// ---------- AI agents ----------
+var AGENTS = [
+ ["SchoolLine Assistant","Multi-turn chat","WhatsApp, website chat","Guardians, then enquiries","Parent Request (WF-21)","live"],
+ ["WhatsApp Chat Agent","Multi-turn chat","WhatsApp router replies","Verified sender tag from the router","Office queue","live"],
+ ["Admissions Voice Agent","Voice","Admissions queue overflow, after hours","Enquiries, guardians","Admissions queue","live"],
+ ["Fee Reminder Agent","Voice","Fee reminder call campaign","Fee Reminders, guardians","Accounts queue","live"],
+ ["Message Reader","Single turn","Inside workflows","—","Returns JSON to the workflow","live"],
+ ["Safe Arrival Caller","Voice","Safe Arrival Check campaign","Guardians","Duty Teachers ring group","build"],
+ ["Writer & Translator","Single turn","Inside workflows","—","Returns text to the workflow","build"],
+ ["SchoolLine Voice Agent","Voice","Office queue overflow","Guardians","Office queue","roadmap"]
+];
+document.getElementById("agents").innerHTML = AGENTS.map(function(a){
+  return '<tr><td>'+a[0]+'</td><td class="nw">'+a[1]+'</td><td>'+a[2]+'</td><td>'+a[3]+'</td><td>'+a[4]+'</td><td><span class="badge b-'+a[5]+'">'+STATUS[a[5]]+'</span></td></tr>';
+}).join("");
+
+// ---------- Workflows ----------
+var WF = [
+ {id:"WF-00",j:"Admissions",p:1,n:"WhatsApp router",trg:"WhatsApp message received",s:["Look up the sender as a guardian or an open enquiry.","Route: open Not-arrived record → arrival reply; file from an enquiry → document intake; unknown number → new enquiry; anything else → the assistant answers."],o:"One trigger with branches is easier to debug than several workflows competing for the same message."},
+ {id:"WF-01",j:"Admissions",p:1,n:"New enquiry",trg:"Router branch: unknown number",s:["Create the enquiry: mobile, stage New enquiry, Admissions queue, follow-up next working day.","Ad phrase \"Grade 6 admission 2027\" → source Facebook Ad and campaign code; else WhatsApp.","The assistant replies with the prospectus."]},
+ {id:"WF-01b",j:"Admissions",p:2,n:"Capture details from chat",trg:"Router branch: open enquiry, text message",s:["Message Reader extracts child name, grade, current school and home town.","Fill only the fields that are still empty."]},
+ {id:"WF-02",j:"Admissions",p:1,n:"After the hotline call",trg:"Enquiry saved by the Admissions Voice Agent",s:["Match the caller to an existing enquiry, or keep the new one.","Save the AI call summary, stage Visit booked, visit time and follow-up date.","Send the visit confirmation on WhatsApp and SMS."]},
+ {id:"WF-03",j:"Admissions",p:1,n:"Document intake",trg:"Router branch: file from an open enquiry",s:["Message Reader identifies the document from its caption and file name.","Save it to the matching file field; set documents to Partial or Complete.","Partial: \"Received X of 4. Still needed: …\". Complete: stage Docs complete, officer notified."]},
+ {id:"WF-04",j:"Admissions",p:1,n:"Offer letter",trg:"Enquiry stage changes to Offer sent",s:["Send the offer letter and invoice on WhatsApp and email.","Add to the Admission Payment Follow-up campaign.","Stage becomes Payment pending."]},
+ {id:"WF-05",j:"Admissions",p:1,n:"Payment follow-up ladder",trg:"Daily at 10:00 (webhook for the demo)",s:["Find enquiries with Payment pending.","1st: WhatsApp reminder with a secure pay link. 2nd: another reminder. 3rd: AI reminder call. Then a task for the Admissions Officer."],o:"Stops by itself once the payment is confirmed."},
+ {id:"WF-06",j:"Admissions",p:1,n:"Payment confirmation",trg:"Stripe payment notice (webhook), or a bank slip photo",s:["Card: find the invoice, mark it Paid with date and reference, set the enquiry to Payment confirmed.","Slip: save the photo, create a Fees request for Accounts, reply \"We received your slip\"."]},
+ {id:"WF-07",j:"Admissions",p:1,n:"Enrolment",trg:"Enquiry stage changes to Payment confirmed",s:["Find the guardian by mobile, or create one.","Match or create the student in the class with the most free seats.","Raise the Term 1 fee, which sends its own pay link.","Set the enquiry to Enrolled and send the welcome message."]},
+ {id:"WF-08",j:"Safe arrival",p:1,n:"Gate check-in",trg:"gate-checkin webhook (QR scan), or an office tap",s:["Find the student and today's attendance record.","Update an open record to Late check-in and resolve the escalation, or create On time / Late check-in.","Send \"checked in at 8:18 AM\" in the guardian's language; tell the teachers if an escalation was open."]},
+ {id:"WF-09",j:"Safe arrival",p:1,n:"Delivery proof and SMS fallback",trg:"Message delivered / delivery failed",s:["Find the attendance record by message ID.","Delivered → mark Delivered. Failed → send the SMS version and mark SMS fallback."]},
+ {id:"WF-10",j:"Safe arrival",p:1,n:"Arrival check sweeps",trg:"School days at 7:30, 7:45 and 8:00",s:["7:30: anyone without a record today gets Not arrived and the 1 / 2 / 3 check message.","7:45: no reply → added to the Safe Arrival Check AI call campaign.","8:00: still unknown → high-priority Safety request and a call from the duty teacher's extension."],o:"Separate short sweeps instead of long waits inside a loop."},
+ {id:"WF-11",j:"Safe arrival",p:1,n:"Parent reply to the check",trg:"Router branch: guardian with an open Not-arrived record",s:["Message Reader returns intent, reason and expected time.","Absent → Absent (informed). Late → Running late with expected time. Call me → high-priority request and a call.","Reply: \"Thank you. We've told her teacher. We'll message you when she checks in.\""]},
+ {id:"WF-11b",j:"Safe arrival",p:2,n:"Parent informs first",trg:"Router branch: guardian says absent or late, no alert yet",s:["Create today's record as Absent (informed) or Running late.","Tell the class teacher. The 7:30 sweep skips this child."]},
+ {id:"WF-12",j:"Safe arrival",p:1,n:"Safe-arrival call outcome",trg:"Call ended for the Safe Arrival Check campaign",s:["AI reads the call summary for reason and expected time.","Update the attendance record. Transferred or no answer → left for the 8:00 sweep."]},
+ {id:"WF-13",j:"Fees",p:2,n:"Fee reminders",trg:"Daily at 9:00",s:["Fees due in 7 days, then 2 days: make a fresh pay link and send it on WhatsApp and SMS.","Mark each reminder sent.","Overdue → Fee Reminder call campaign, AI first, then a live agent."]},
+ {id:"WF-14",j:"Fees",p:2,n:"Fee receipt",trg:"Fee status changes to Paid",s:["Send the receipt on WhatsApp and email."]},
+ {id:"WF-15",j:"Progress",p:2,n:"Personal results summary",trg:"release-results webhook after the marks import",s:["For each student, read this exam's results.","AI writes a three-line summary in the guardian's language: biggest improvement, one area to work on.","Save it and send results_ready."]},
+ {id:"WF-16",j:"Progress",p:2,n:"Teacher concern → parent → meeting",trg:"Student Concern created",s:["AI drafts a gentle message in the guardian's language.","Send it with \"Reply 1 to book a phone meeting\".","Reply 1 → create a phone meeting and send the invite."]},
+ {id:"WF-17",j:"Progress",p:2,n:"Phone parent-teacher meeting",trg:"Every 5 minutes on school days",s:["Meetings starting in the next 5 minutes → call the guardian from the teacher's extension.","The teacher conferences in the second guardian.","Call ended → AI summary, next steps and the concern's action plan saved."]},
+ {id:"WF-18",j:"Everyday",p:2,n:"Notices in three languages",trg:"Notice status changes to Translate, then Ready",s:["AI translates the English notice into Sinhala and Tamil.","Office reviews and sets Ready.","Each guardian in the audience gets the notice in their language."]},
+ {id:"WF-19",j:"Everyday",p:3,n:"Friday digest",trg:"Fridays at 15:30",s:["For each student: this week's attendance, fees due, next week's events.","AI writes one short message; send weekly_digest."]},
+ {id:"WF-20",j:"Everyday",p:3,n:"Attendance early warning",trg:"Mondays at 9:00",s:["Count late and absent days in the last 14 days.","3 or more → a Concern for the counsellor and a call in Counsellor Outreach."]},
+ {id:"WF-21",j:"Everyday",p:1,n:"Hand-off to staff",trg:"AI transfer or chat escalation",s:["Create a Parent Request with channel, category, question, AI summary, priority and reply-by time.","Every 15 minutes: requests past 80% of their time → remind the group."]}
+];
+var wfj = "All";
+function renderWF(){
+  var js = ["All"]; WF.forEach(function(w){ if(js.indexOf(w.j)<0) js.push(w.j); });
+  document.getElementById("wfchips").innerHTML = js.map(function(j){
+    var n = j==="All" ? WF.length : WF.filter(function(w){return w.j===j}).length;
+    return '<button class="chip" type="button" data-j="'+j+'" aria-pressed="'+(wfj===j)+'">'+j+' · '+n+'</button>';
+  }).join("");
+  document.getElementById("wfs").innerHTML = WF.filter(function(w){return wfj==="All"||w.j===wfj}).map(function(w){
+    return '<article class="wf"><header><span class="id">'+w.id+'</span><h4>'+w.n+'</h4><span class="badge b-p'+w.p+'">P'+w.p+'</span></header>'+
+      '<p class="trg"><b>When:</b> '+w.trg+'</p><ol>'+w.s.map(function(x){return '<li>'+x+'</li>'}).join("")+'</ol>'+(w.o?'<p class="out">'+w.o+'</p>':'')+'</article>';
+  }).join("");
+}
+document.getElementById("wfchips").addEventListener("click", function(e){
+  var b = e.target.closest("button"); if(!b) return; wfj = b.dataset.j; renderWF();
+});
+
+// ---------- Blueprint tabs ----------
+(function(){
+  var tabs = [].slice.call(document.querySelectorAll("#bp-tabs .tab"));
+  function pick(t, focus){
+    tabs.forEach(function(x){
+      var on = x===t; x.setAttribute("aria-selected", on); x.tabIndex = on ? 0 : -1;
+      document.getElementById(x.getAttribute("aria-controls")).hidden = !on;
+    });
+    if(focus) t.focus();
+    hscroll(t);
+  }
+  var fromHash = tabs.filter(function(t){ return "#"+t.getAttribute("aria-controls")===location.hash; })[0];
+  if(fromHash){ pick(fromHash); document.getElementById("blueprint").scrollIntoView(); }
+  tabs.forEach(function(t,i){
+    t.addEventListener("click", function(){
+      if(history.replaceState) history.replaceState(null, "", "#"+t.getAttribute("aria-controls"));
+      pick(t);
+      var top = document.getElementById("bp-tabs").getBoundingClientRect().top;
+      if(top < 60) document.getElementById("blueprint").scrollIntoView();
+    });
+    t.addEventListener("keydown", function(e){
+      var k = e.key, j = i;
+      if(k==="ArrowRight") j = (i+1)%tabs.length; else if(k==="ArrowLeft") j = (i-1+tabs.length)%tabs.length;
+      else if(k==="Home") j = 0; else if(k==="End") j = tabs.length-1; else return;
+      e.preventDefault(); pick(tabs[j], true);
+    });
+  });
+})();
+
+// ---------- FAQ ----------
 var QA = [
  {c:"Product",q:"What problem do you solve first?",a:["Parents cannot see the school day, and the office answers the same questions all day. We start with the two moments that matter most: admissions (lost enquiries) and safe arrival (is my child at school?)."]},
  {c:"Product",q:"Why WhatsApp and not a parent app?",a:["Parents already use WhatsApp every day. There is nothing to install, so there is no adoption barrier. Calls and SMS cover parents who do not use it."]},
  {c:"Product",q:"What happens when the AI does not know the answer?",a:["It says so and offers to pass the question to the school office. The case goes to a staff queue with the conversation attached, so the parent does not repeat themselves."]},
  {c:"Product",q:"Do you track school transport?",a:["No. The school does not provide transport, so we do not claim to. We confirm arrival at the gate and follow up when a child has not arrived."]},
- {c:"AI and safety",q:"Can the AI give a wrong fee or date?",a:["Answers come from documents the school approves, not from the model's memory. Money changes are made by the CRM and workflows, never by the AI's own words. Our fee figures in the demo are samples and are labelled that way."]},
+ {c:"AI and safety",q:"Can the AI give a wrong fee or date?",a:["Answers come from information the school approves, not from the model's memory. Money changes are made by the CRM and workflows, never by the AI's own words. Our fee figures in the demo are samples and are labelled that way."]},
  {c:"AI and safety",q:"How do you protect children's data?",a:["Access is set by role at three levels: All, Group or Own. Sensitive fields such as health notes and payment details are locked to named roles. The assistant recognises a parent by their mobile and answers only about their own child. Parents opt in to WhatsApp, and promotion opt-outs never block safety or fee messages."]},
- {c:"AI and safety",q:"Does it work in Sinhala and Tamil?",a:["Message templates are prepared in three languages and the reply reader is built for Sinhala, Tamil and mixed-script messages. Sinhala voice quality is something we test before the finale. If it is not good enough, we use the IVR plus a WhatsApp text for that language."]},
- {c:"Demo",q:"What in the demo is real, and what is simulated?",a:["Real: WhatsApp messages, calls, CRM records, AI agents, workflows, and Stripe payments in test mode. Simulated: the gate scan comes from a QR form posting to a webhook, not a hardware device. Future: LMS sync, biometric devices, and automatic Facebook lead capture."]},
- {c:"Demo",q:"What if the live demo breaks?",a:["Every live scene is recorded at the dress rehearsal. If a step fails, we play the recording and move on. We do not debug on stage."]},
+ {c:"AI and safety",q:"Does it work in Sinhala and Tamil?",a:["Message templates are prepared in three languages and the reply reader is built for Sinhala, Tamil and mixed-script messages. Sinhala voice quality is tested before use; if it is not good enough, Sinhala-speaking parents get the recorded IVR plus a WhatsApp text in Sinhala."]},
+ {c:"Demo",q:"What in the demo is real, and what is simulated?",a:["Real: WhatsApp messages, calls, CRM records, AI agents, workflows, dashboards, and Stripe payments in test mode. Simulated: the gate scan comes from a QR form posting to a webhook, not a hardware device, and timed sweeps are fired on cue. Roadmap: LMS sync, biometric devices, and automatic Facebook lead capture."]},
  {c:"Demo",q:"Why does the payment use a test card?",a:["Stripe test mode proves the full flow without moving real money: link, checkout, notice, invoice marked Paid. Going live means switching to the school's own Stripe account and keys."]},
- {c:"Business",q:"Who pays, and how much?",a:["The school pays a monthly subscription based on student count, plus message and call costs at cost, and a one-time setup fee for importing data. Prices are not set. The pilot will tell us what schools value."]},
- {c:"Business",q:"How long does it take to onboard a school?",a:["Data goes in by CSV in a fixed order: classes, guardians, students, fees, results. Then channels (WhatsApp number, SMS sender, phone system) and the school's approved documents are connected. The finale plan builds the full setup in about seven hours."]},
+ {c:"Business",q:"Who pays, and how much?",a:["The school pays a monthly subscription based on student count, plus message and call costs at cost, and a one-time setup fee for importing data. Prices are not set yet. The pilot will tell us what schools value."]},
+ {c:"Business",q:"How long does it take to onboard a school?",a:["Data goes in by CSV in a fixed order: classes, guardians, students, fees, results. Then channels (WhatsApp number, SMS sender, phone system) and the school's approved documents are connected. Our finale plan builds the full setup from a clean install in about seven hours."]},
  {c:"Business",q:"How is this different from a school ERP?",a:["An ERP stores records and expects parents to log in. SchoolLine reaches parents on WhatsApp and the phone, answers them, and acts: it reminds, calls, escalates and updates the record. It can sit beside an existing system through the API."]},
  {c:"Business",q:"What do you measure to prove it works?",a:["Time from gate scan to parent message (target under 30 seconds), share of after-hours enquiries handled by AI, arrival cases resolved before 8:15, office calls avoided, and fees paid within the reminder window."]},
- {c:"Technical",q:"What are the limits of WhatsApp messaging?",a:["Outside a 24-hour window after the parent last wrote, WhatsApp requires an approved template. Our reminders and notices use templates, and an SMS fallback covers failed deliveries. One weekly digest also cuts message volume."]},
- {c:"Technical",q:"What did you build beyond the brief?",a:["Card payments with automatic invoice updates, a reminder ladder (link on creation, 7 days before, 2 days before) with WhatsApp, SMS and call campaigns, and a Facebook lead capture integration for the next release."]},
+ {c:"Technical",q:"What are the limits of WhatsApp messaging?",a:["Outside a 24-hour window after the parent last wrote, WhatsApp requires an approved template. Reminders and notices use templates, and an SMS fallback covers failed deliveries. One weekly digest also cuts message volume."]},
+ {c:"Technical",q:"What did you build beyond the brief?",a:["Card payments with automatic invoice updates, a reminder ladder (link on creation, 7 days before, 2 days before) with WhatsApp, SMS and call campaigns, an AI reader that turns free-text replies into structured records, and a Facebook lead capture integration for the next release."]},
  {c:"Technical",q:"What comes after the hackathon?",a:["Run a pilot at one school, replace sample data with approved figures, move payments to live keys, connect an LMS, and add hardware gate devices."]}
 ];
 var qcur = "All";
@@ -583,7 +878,23 @@ document.getElementById("qchips").addEventListener("click", function(e){
   var b = e.target.closest("button"); if(!b) return; qcur = b.dataset.c; renderQA();
 });
 
-renderStatus(); renderScenes(); renderChecks(); renderQA();
+renderStatus(); renderScenes(); renderWF(); renderQA();
+
+// ---------- Nav highlight + reveal on scroll ----------
+(function(){
+  var links = [].slice.call(document.querySelectorAll("nav.top a.l"));
+  var map = {}; links.forEach(function(a){ map[a.getAttribute("href").slice(1)] = a; });
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ links.forEach(function(a){a.classList.remove("on")}); var a = map[e.target.id]; if(a){ a.classList.add("on"); hscroll(a, true); } } });
+    }, {rootMargin:"-45% 0px -50% 0px"});
+    Object.keys(map).concat("top").forEach(function(id){ var s = document.getElementById(id); if(s) io.observe(s); });
+    var rv = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); rv.unobserve(e.target); } }); }, {rootMargin:"0px 0px -8% 0px"});
+    document.querySelectorAll(".reveal").forEach(function(el){ rv.observe(el); });
+  } else {
+    document.querySelectorAll(".reveal").forEach(function(el){ el.classList.add("in"); });
+  }
+})();
 </script>
 </body>
 </html>
