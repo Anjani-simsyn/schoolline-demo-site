@@ -21,6 +21,7 @@
   <a class="logo" href="#top"><i aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D2235" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c5 0 9 3.4 9 7.6S17 18.2 12 18.2c-1 0-2-.1-2.9-.4L4.5 20l1.2-3.6C4 15.2 3 13 3 10.6 3 6.4 7 3 12 3z"/></svg></i>SchoolLine <b>AI</b></a>
   <a class="l" href="#problem">Problem</a>
   <a class="l" href="#solution">Solution</a>
+  <a class="l" href="#highlights">Highlights</a>
   <a class="l" href="#demo">Live demo</a>
   <a class="l" href="#progress">What's live</a>
   <a class="l" href="#blueprint">Blueprint</a>
@@ -35,9 +36,10 @@
   <div class="hero-text">
     <span class="eyebrow">SIPL × Uniconnect AI Hackathon 2026 · Team Data Dragons</span>
     <h1>Every enquiry answered. Every child <em>accounted for.</em></h1>
-    <p class="lede">SchoolLine AI is an always-on front office on WhatsApp and the phone. It answers parents 24/7 in Sinhala, Tamil and English, confirms safe arrival at the gate, collects fees and keeps every family informed. Staff only handle what needs a person.</p>
+    <p class="lede">SchoolLine AI is an always-on front office on WhatsApp and the phone. It answers parents 24/7 in Sinhala, Tamil and English, confirms safe arrival at the gate, collects fees through Stripe, follows Google Classroom homework and keeps every family informed. Staff only handle what needs a person.</p>
     <div class="btns">
       <a class="btn pri" href="#demo">See the 10-minute demo <span aria-hidden="true">→</span></a>
+      <a class="btn sec" href="#highlights">See the integrations</a>
       <a class="btn sec" href="#blueprint">Explore the full blueprint</a>
     </div>
     <p class="challenge"><b>Track · Connected Learning Communities</b>How can educational institutions use Uniconnect AI to give students and parents timely information without overwhelming their staff?</p>
@@ -60,11 +62,12 @@
 </header>
 <div class="wrap" style="padding-bottom:8px">
   <div class="stats" aria-label="Build at a glance">
-    <div><b>12</b><span>school CRM modules, one record per child</span></div>
+    <div><b>13</b><span>school CRM modules, one record per child</span></div>
     <div><b>5</b><span>AI agents across chat and voice</span></div>
     <div><b>17</b><span>approved WhatsApp templates</span></div>
     <div><b>6</b><span>role-based school dashboards</span></div>
     <div><b>3</b><span>languages: Sinhala, Tamil, English</span></div>
+    <a href="#highlights"><b>3</b><span>live integrations: Google Classroom, Stripe, gate QR</span></a>
   </div>
 </div>
 </div>
@@ -97,7 +100,7 @@
   <div class="sec-head reveal"><span class="eyebrow"><b>02</b> The solution</span><h2>Five connected journeys, <em>one system</em></h2>
   <p class="lede">Every channel feeds one CRM. AI agents and workflows do the routine work. A person steps in only when needed, with the full conversation in front of them.</p></div>
   <div class="flow reveal" aria-label="How SchoolLine works">
-    <div class="col"><h3>Parents reach the school by</h3><ul><li>WhatsApp message</li><li>24/7 hotline call</li><li>Gate QR scan</li><li>Website chat</li><li>Facebook ad → WhatsApp</li></ul></div>
+    <div class="col"><h3>Parents and systems connect by</h3><ul><li>WhatsApp message</li><li>24/7 hotline call</li><li>Gate QR scan</li><li>Google Classroom sync</li><li>Stripe payments</li><li>Facebook ad → WhatsApp</li></ul></div>
     <div class="arrow" aria-hidden="true">→</div>
     <div class="col core"><h3>SchoolLine on Uniconnect AI</h3><ul><li><b>AI agents</b> answer chat and calls</li><li><b>Workflows</b> route, remind, escalate, update</li><li><b>CRM</b> keeps one record per child</li><li><b>Campaigns</b> call and message at scale</li><li><b>Dashboards</b> show it all live</li></ul></div>
     <div class="arrow" aria-hidden="true">→</div>
@@ -109,14 +112,91 @@
       <tr><td>Admissions</td><td>Instant WhatsApp answers, a 24/7 hotline that books visits, documents sent by WhatsApp, a secure pay link, automatic enrolment</td><td>WhatsApp AI agent, IVR + queue + AI voice agent, Leads, campaigns, workflows, Stripe checkout</td></tr>
       <tr><td>Safe arrival</td><td>An "arrived" message at the gate. A check message if she hasn't arrived. An AI call, then a duty teacher, if nobody replies</td><td>Webhook check-in, scheduled workflows, WhatsApp + SMS fallback, voice campaign, ring group, conference</td></tr>
       <tr><td>Fees</td><td>A pay link when a fee is raised, reminders 7 and 2 days before the due date, receipts, a bank-slip backup</td><td>Scheduled workflows, Stripe checkout, SMS, AI and live-agent reminder campaigns, CRM</td></tr>
-      <tr><td>Marks &amp; progress</td><td>A personal AI summary of results, early notice of concerns, phone parent-teacher meetings</td><td>Bulk import, AI agent execution, conference calls, call summaries</td></tr>
+      <tr><td>Homework &amp; progress</td><td>Google Classroom reminders before work is late, quiz marks saved automatically, a personal AI summary of results, early notice of concerns, phone parent-teacher meetings</td><td>Google Classroom + Forms APIs, scheduled workflows, AI agent execution, conference calls, call summaries</td></tr>
       <tr><td>Everyday answers</td><td>Questions answered in Sinhala, Tamil or English. Notices in each parent's language. One weekly digest</td><td>Chat and voice agents, record lookup, AI translation, scheduled digest</td></tr>
     </tbody></table></div>
 </section>
 
+<!-- ================= HIGHLIGHTS ================= -->
+<section class="block" id="highlights">
+  <div class="sec-head reveal"><span class="eyebrow"><b>03</b> Highlights</span><h2>Three integrations, <em>working today</em></h2>
+  <p class="lede">Beyond messaging and AI, SchoolLine connects to the systems a school already runs on: the classroom, the school gate and the payment. All three run on our Uniconnect instance now.</p></div>
+  <div class="feats">
+
+    <article class="feat reveal" id="hl-classroom">
+      <div class="feat-txt">
+        <div class="feat-tag"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D2235" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l10-5 10 5-10 5z"/><path d="M6 10.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.5"/><path d="M22 8v6"/></svg></span><span class="feat-name">Google Classroom + Google Forms</span><span class="badge b-live">Live &amp; tested</span></div>
+        <h3>Homework never slips past the parents</h3>
+        <p class="lead">Assignments from Google Classroom flow into the CRM as one record per student per assignment, with its submission status. Parents hear about missing work before it is late, and quiz marks land in Results without anyone typing them.</p>
+        <ol class="fsteps">
+          <li><span><b>Sync.</b> The Classroom Sync webhook adds the student, records the assignment and tracks whether it was submitted.</span></li>
+          <li><span><b>Remind.</b> Every morning at 8:00, work still not submitted is flagged to the guardian on WhatsApp and SMS: 3 days before the due date, and again on the day.</span></li>
+          <li><span><b>Score.</b> Every 15 minutes the Classroom and Forms APIs are read. Each quiz response is matched to the student by Google email and saved as a result, never twice.</span></li>
+        </ol>
+        <div class="techs"><span>Google Classroom API</span><span>Google Forms API</span><span>OAuth token refresh</span><span>API collections</span><span>Scheduled workflows</span><span>WhatsApp + SMS</span></div>
+      </div>
+      <div class="feat-vis" aria-label="Example Google Classroom reminder and quiz result">
+        <div class="vh"><span class="dot"></span>WhatsApp · SchoolLine AI · 8:00 AM</div>
+        <div class="bub">Dear parent, Dinithi has not yet submitted the Google Classroom assignment <b>Fractions worksheet</b> for Grade 6 Maths. It is due in 3 days, on 20 Nov.<small>8:00</small></div>
+        <div class="bub">SchoolLine: Dinithi has not submitted <b>Fractions worksheet</b> for Grade 6 Maths. It is due today.<small>SMS · 8:00</small></div>
+        <div class="vcard"><div><b>Results · Maths quiz 2</b><span>Saved from Google Forms · matched by student email</span></div><span class="vpill paid">18 / 20</span></div>
+      </div>
+    </article>
+
+    <article class="feat reveal" id="hl-attendance">
+      <div class="feat-txt">
+        <div class="feat-tag"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D2235" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/></svg></span><span class="feat-name">Gate QR attendance tracker</span><span class="badge b-live">Live &amp; tested</span></div>
+        <h3>Parents know the minute she arrives</h3>
+        <p class="lead">Every ID card carries a QR code with the admission number. A scan at the gate runs the Attendance Tracker, which applies the school's rule in Sri Lanka time and tells the parent on WhatsApp within seconds.</p>
+        <ol class="fsteps">
+          <li><span><b>Scan.</b> The gate tablet posts the admission number, time, gate and device to the attendance webhook.</span></li>
+          <li><span><b>Decide.</b> It finds the student and checks the class cutoff in Sri Lanka time: On time or Late check-in.</span></li>
+          <li><span><b>Record.</b> It creates today's attendance, or closes the 7:30 "Not arrived" record and ends the escalation.</span></li>
+          <li><span><b>Tell.</b> The guardian gets "Dinithi checked in at 7:12 AM", and the Morning Safety Board updates live.</span></li>
+        </ol>
+        <div class="techs"><span>Webhook trigger</span><span>Script rules</span><span>CRM create / update</span><span>WhatsApp</span><span>7:30 arrival sweep</span><span>Live dashboard</span></div>
+      </div>
+      <div class="feat-vis" aria-label="Example Morning Safety Board and check-in message">
+        <div class="vh"><span class="dot"></span>Morning Safety Board · Grade 6 · 7:45 AM</div>
+        <div class="board">
+          <div><b>20</b><span>Expected today</span></div>
+          <div class="ok"><b>17</b><span>Checked in</span></div>
+          <div class="warn"><b>2</b><span>Running late (informed)</span></div>
+          <div class="bad"><b>1</b><span>Not arrived · AI calling</span></div>
+        </div>
+        <div class="vcard"><div><b>Gate QR · Main gate</b><span>ADM-2027-0061 · Dinithi · 6B</span></div><span class="vpill paid">On time 7:12</span></div>
+        <div class="bub dark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F6C451" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>Dinithi checked in at 7:12 AM.</div>
+      </div>
+    </article>
+
+    <article class="feat reveal" id="hl-stripe">
+      <div class="feat-txt">
+        <div class="feat-tag"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D2235" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></span><span class="feat-name">Stripe payment gateway</span><span class="badge b-live">Live &amp; tested</span></div>
+        <h3>Fees paid from a WhatsApp link, matched automatically</h3>
+        <p class="lead">Every fee and every admission offer gets its own Stripe Checkout link. When the parent pays, Stripe's notice marks the invoice Paid, so Accounts never has to match a bank slip by hand.</p>
+        <ol class="fsteps">
+          <li><span><b>Raise.</b> A new fee converts the amount to cents and creates a Stripe Checkout session, with the invoice number as the reference.</span></li>
+          <li><span><b>Send.</b> The secure link goes to the bill-to guardian on WhatsApp and SMS, with a fresh link again 7 days and 2 days before the due date.</span></li>
+          <li><span><b>Pay.</b> The parent pays on Stripe's own hosted page. Card details never touch SchoolLine.</span></li>
+          <li><span><b>Reconcile.</b> Stripe's webhook confirms the payment; the invoice is set to Paid with the date. For admissions the enquiry moves to Payment confirmed and enrolment starts by itself.</span></li>
+        </ol>
+        <div class="techs"><span>Stripe Checkout Sessions API</span><span>Stripe webhook</span><span>API collections</span><span>7- and 2-day reminders</span><span>Test mode for the demo</span></div>
+      </div>
+      <div class="feat-vis" aria-label="Example Stripe payment link and invoice status">
+        <div class="vh"><span class="dot"></span>WhatsApp · SchoolLine AI</div>
+        <div class="bub">Dear parent, fee <b>INV-0042</b> is ready to pay. Use this secure Stripe link: <u>checkout.stripe.com/c/pay/…</u><small>9:00</small></div>
+        <div class="vcard"><div><b>INV-0042 · Term 1 fee</b><span>LKR 15,000 · due 30 Nov</span></div><span class="vpill due">Due</span></div>
+        <div class="varrow" aria-hidden="true">↓ Stripe webhook: paid</div>
+        <div class="vcard"><div><b>INV-0042 · Term 1 fee</b><span>Paid on 17 Nov · reference saved</span></div><span class="vpill paid">Paid</span></div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
 <!-- ================= DEMO ================= -->
 <section class="block" id="demo">
-  <div class="sec-head reveal"><span class="eyebrow"><b>03</b> Live demo</span><h2>A 10-minute story, <em>told live</em></h2>
+  <div class="sec-head reveal"><span class="eyebrow"><b>04</b> Live demo</span><h2>A 10-minute story, <em>told live</em></h2>
   <p class="lede">An opening video, eight live scenes on real phones, and a closing video. Choose a scene to see what happens on screen and what runs behind it.</p></div>
   <div class="demo reveal">
     <div class="scenes" id="scenes" role="tablist" aria-label="Demo scenes"></div>
@@ -152,16 +232,16 @@
   <div class="sub reveal rvs">
     <h3>What is real in the demo</h3>
     <div class="grid g3">
-      <div class="card"><h3><span class="dotc" style="background:var(--live)"></span>Real</h3><p>WhatsApp messages and calls on real phones, CRM records, AI agents, workflows, dashboards, and Stripe card payments in test mode.</p></div>
+      <div class="card"><h3><span class="dotc" style="background:var(--live)"></span>Real</h3><p>WhatsApp messages and calls on real phones, CRM records, AI agents, workflows, dashboards, Google Classroom sync and reminders, and Stripe card payments in test mode.</p></div>
       <div class="card"><h3><span class="dotc" style="background:var(--accent)"></span>Simulated</h3><p>The gate scan is a QR form posting to a webhook, not a hardware reader. The 7:30 sweep is fired on cue instead of waiting for the clock. Fee figures are samples.</p></div>
-      <div class="card"><h3><span class="dotc" style="background:var(--road)"></span>Roadmap</h3><p>Automatic Facebook lead capture (built in code, next release), LMS homework and grade sync, and RFID or biometric gate devices.</p></div>
+      <div class="card"><h3><span class="dotc" style="background:var(--road)"></span>Roadmap</h3><p>Automatic Facebook lead capture (built in code, next release), Moodle alongside Google Classroom, and RFID or biometric gate devices.</p></div>
     </div>
   </div>
 </section>
 
 <!-- ================= PROGRESS ================= -->
 <section class="block" id="progress">
-  <div class="sec-head reveal"><span class="eyebrow"><b>04</b> What's live</span><h2>Where the build <em>stands today</em></h2>
+  <div class="sec-head reveal"><span class="eyebrow"><b>05</b> What's live</span><h2>Where the build <em>stands today</em></h2>
   <p class="lede">"Live and tested" means we ran it end to end on our Uniconnect instance and saw it work. Filter by status.</p></div>
   <div class="reveal">
     <div class="meter" id="meter" aria-hidden="true"></div>
@@ -174,8 +254,8 @@
 
 <!-- ================= BLUEPRINT ================= -->
 <section class="block" id="blueprint">
-  <div class="sec-head reveal"><span class="eyebrow"><b>05</b> Solution blueprint</span><h2>The full plan, <em>module by module</em></h2>
-  <p class="lede">Everything a school needs, configured on Uniconnect: the data model, who can see what, every channel, the AI agents, 24 workflows, campaigns, integrations and dashboards.</p></div>
+  <div class="sec-head reveal"><span class="eyebrow"><b>06</b> Solution blueprint</span><h2>The full plan, <em>module by module</em></h2>
+  <p class="lede">Everything a school needs, configured on Uniconnect: the data model, who can see what, every channel, the AI agents, 27 workflows, campaigns, integrations and dashboards.</p></div>
 
   <div class="tabs" role="tablist" aria-label="Blueprint sections" id="bp-tabs">
     <button class="tab" role="tab" id="t-data" aria-controls="p-data" aria-selected="true">Data model</button>
@@ -190,7 +270,7 @@
 
   <!-- DATA MODEL -->
   <div class="tabpanel" role="tabpanel" id="p-data" aria-labelledby="t-data">
-    <div class="tp-head"><h3>Twelve modules, one record per child</h3><p>The built-in Leads module becomes Admission Enquiries, so campaigns, follow-up dates and assignment work out of the box. Ten custom modules hold the school's records, plus a Fee Reminders queue for call campaigns. Everything links, so an enquiry becomes a guardian and a student with no retyping.</p></div>
+    <div class="tp-head"><h3>Thirteen modules, one record per child</h3><p>The built-in Leads module becomes Admission Enquiries, so campaigns, follow-up dates and assignment work out of the box. Ten custom modules hold the school's records, plus a Fee Reminders queue for call campaigns and Classroom Assignments synced from Google Classroom. Everything links, so an enquiry becomes a guardian and a student with no retyping.</p></div>
     <div class="dm" aria-label="How the modules link">
       <div class="grp"><b>Before enrolment</b>
         <div class="m core">Admission Enquiries <small>Leads</small></div>
@@ -208,6 +288,7 @@
         <div class="m">Fees · Fee Reminders <small>pay links, calls</small></div>
         <div class="m">Results <small>AI summaries</small></div>
         <div class="m">Student Concerns → Meetings <small>phone conferences</small></div>
+        <div class="m">Classroom Assignments <small>Google Classroom</small></div>
         <div class="m">Notices <small>3 languages</small></div>
       </div>
     </div>
@@ -323,7 +404,7 @@ Messages may be in Sinhala, Tamil, English or a mix (Singlish / Tanglish).</pre>
 
   <!-- WORKFLOWS -->
   <div class="tabpanel" role="tabpanel" id="p-wf" aria-labelledby="t-wf" hidden>
-    <div class="tp-head"><h3>24 workflows do the routine work</h3><p>Built from Uniconnect triggers (WhatsApp received, record created or updated, schedules, webhooks, call ended, delivery failed) and actions (CRM, WhatsApp, SMS, email, AI agent execution, add to campaign, make call, API request), with routers, conditions and loops.</p>
+    <div class="tp-head"><h3>27 workflows do the routine work</h3><p>Built from Uniconnect triggers (WhatsApp received, record created or updated, schedules, webhooks, call ended, delivery failed) and actions (CRM, WhatsApp, SMS, email, AI agent execution, add to campaign, make call, API request), with routers, conditions and loops.</p>
       <div class="legend"><span><span class="badge b-p1">P1</span> needed for the demo</span><span><span class="badge b-p2">P2</span> strong extra</span><span><span class="badge b-p3">P3</span> if time allows</span></div></div>
     <div class="chips" id="wfchips" role="group" aria-label="Filter workflows by journey"></div>
     <div class="wfs" id="wfs"></div>
@@ -352,13 +433,15 @@ Messages may be in Sinhala, Tamil, English or a mix (Singlish / Tanglish).</pre>
     <div class="tw"><table>
       <thead><tr><th>Integration</th><th>How it works</th><th>Status</th></tr></thead>
       <tbody>
-        <tr><td>Stripe payments</td><td>A new fee creates a secure checkout link sent on WhatsApp and SMS. The payment notice comes back to a webhook, which finds the invoice and marks it Paid with the date and reference.</td><td><span class="badge b-live">Live &amp; tested</span></td></tr>
-        <tr><td>Gate QR check-in</td><td>Each ID card carries a QR with the admission number. A gate tablet form posts to the <code>gate-checkin</code> webhook, which updates attendance and messages the parent.</td><td><span class="badge b-testing">Final testing</span></td></tr>
+        <tr><td>Stripe payment gateway</td><td>A new fee creates a Stripe Checkout session (Checkout Sessions API, invoice number as reference) and the link goes out on WhatsApp and SMS. The payment notice comes back to a webhook, which finds the invoice and marks it Paid with the date and reference.</td><td><span class="badge b-live">Live &amp; tested</span></td></tr>
+        <tr><td>Gate QR attendance tracker</td><td>Each ID card carries a QR with the admission number. A gate tablet posts to the attendance webhook, which applies the cutoff in Sri Lanka time, updates attendance and messages the parent.</td><td><span class="badge b-live">Live &amp; tested</span></td></tr>
         <tr><td>Office tap</td><td>Office staff record arrival from a tablet when a child forgets the card.</td><td><span class="badge b-live">Live &amp; tested</span></td></tr>
         <tr><td>School systems via API</td><td>An Integration service account creates attendance or imports marks from any existing system through the REST API.</td><td><span class="badge b-live">Live &amp; tested</span></td></tr>
         <tr><td>Principal's AI assistant</td><td>An AI client connects to the Uniconnect MCP server with the service account, limited to what the Integration role allows.</td><td><span class="badge b-build">Finale build</span></td></tr>
         <tr><td>Facebook lead capture</td><td>Ad leads flow into Admission Enquiries automatically, tagged with the campaign. Built in code; the demo uses the ad's pre-filled WhatsApp message.</td><td><span class="badge b-roadmap">Roadmap</span></td></tr>
-        <tr><td>LMS (Moodle, Google Classroom)</td><td>Homework and grade alerts through API collections and the Execute API Request action.</td><td><span class="badge b-roadmap">Roadmap</span></td></tr>
+        <tr><td>Google Classroom</td><td>Classroom Sync webhook keeps one record per student per assignment; scheduled workflows remind guardians 3 days before and on the due day. Classroom API collection with OAuth token refresh.</td><td><span class="badge b-live">Live &amp; tested</span></td></tr>
+        <tr><td>Google Forms quizzes</td><td>Classroom and Forms APIs read quiz responses every 15 minutes; scores are matched by student email and saved to Results.</td><td><span class="badge b-testing">Final testing</span></td></tr>
+        <tr><td>Moodle</td><td>The same API-collection pattern for schools on Moodle.</td><td><span class="badge b-roadmap">Roadmap</span></td></tr>
         <tr><td>RFID / biometric gates</td><td>The device software posts to the same <code>gate-checkin</code> webhook. No change on our side.</td><td><span class="badge b-roadmap">Roadmap</span></td></tr>
       </tbody></table></div>
     <div class="grid">
@@ -400,7 +483,7 @@ Messages may be in Sinhala, Tamil, English or a mix (Singlish / Tanglish).</pre>
 
 <!-- ================= BUILD PLAN ================= -->
 <section class="block" id="build">
-  <div class="sec-head reveal"><span class="eyebrow"><b>06</b> Build plan</span><h2>How we built it, <em>and how fast it installs</em></h2>
+  <div class="sec-head reveal"><span class="eyebrow"><b>07</b> Build plan</span><h2>How we built it, <em>and how fast it installs</em></h2>
   <p class="lede">Six days of preparation, then a full school setup from a clean install in about seven hours on finale day. The same playbook is how we would onboard a real school.</p></div>
   <div class="grid reveal" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr));align-items:start">
     <div class="card" style="padding:26px">
@@ -410,7 +493,7 @@ Messages may be in Sinhala, Tamil, English or a mix (Singlish / Tanglish).</pre>
         <div class="ev done"><span class="d">13 Nov</span><b>Agents, layouts, dashboards</b><p>Admissions Voice Agent, role layouts, email templates and six dashboards published by role.</p></div>
         <div class="ev done"><span class="d">14–15 Nov</span><b>WhatsApp, payments, gate</b><p>WhatsApp connected with the SchoolLine Assistant, Stripe pay links and fee reminders, gate check-in webhook, voice agent tests.</p></div>
         <div class="ev done"><span class="d">16 Nov</span><b>Live scenes end to end</b><p>WhatsApp router and enquiry capture, hotline visit booking, enrolment, offer and payment ladder, arrival checks, results and concerns.</p></div>
-        <div class="ev"><span class="d">17 Nov</span><b>Finale</b><p>Install, build, rehearse, present.</p></div>
+        <div class="ev"><span class="d">17 Nov</span><b>Finale</b><p>Configuration moved to the finale environment; Google Classroom sync and reminders tested there. Then rehearse and present.</p></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:14px">
@@ -441,7 +524,7 @@ Messages may be in Sinhala, Tamil, English or a mix (Singlish / Tanglish).</pre>
 
 <!-- ================= MARKET ================= -->
 <section class="block" id="market">
-  <div class="sec-head reveal"><span class="eyebrow"><b>07</b> Go to market</span><h2>Who we sell to, <em>and why they buy</em></h2>
+  <div class="sec-head reveal"><span class="eyebrow"><b>08</b> Go to market</span><h2>Who we sell to, <em>and why they buy</em></h2>
   <p class="lede">We start where the pain is sharpest: schools that compete for admissions and answer phones all day. Figures marked as targets are goals for a pilot, not results.</p></div>
 
   <div class="pos reveal"><small>Positioning</small>For school leaders who lose enquiries and drown in routine calls, SchoolLine is the parent communication system that answers on WhatsApp and phone in Sinhala, Tamil and English, 24 hours a day, so parents stay informed, staff stay focused, and children stay safe.</div>
@@ -527,7 +610,7 @@ Messages may be in Sinhala, Tamil, English or a mix (Singlish / Tanglish).</pre>
 
 <!-- ================= FAQ ================= -->
 <section class="block" id="faq">
-  <div class="sec-head reveal"><span class="eyebrow"><b>08</b> FAQ</span><h2>Questions <em>worth asking</em></h2>
+  <div class="sec-head reveal"><span class="eyebrow"><b>09</b> FAQ</span><h2>Questions <em>worth asking</em></h2>
   <p class="lede">Short, honest answers about the product, AI safety, the demo and the business.</p></div>
   <div class="chips" id="qchips" role="group" aria-label="Filter questions"></div>
   <div class="qa" id="qa-list"></div>
@@ -554,10 +637,10 @@ function hscroll(el, center){
 // ---------- Build status (edit as the build moves): live, testing, build, roadmap ----------
 var STATUS = {live:"Live & tested", testing:"Final testing", build:"Finale build", roadmap:"Roadmap"};
 var ITEMS = [
- {s:"live",a:"Fees",t:"Card payment link",d:"A new fee sends the parent a secure Stripe checkout link on WhatsApp and SMS. A test-card payment went through end to end."},
- {s:"live",a:"Fees",t:"Invoice marked Paid automatically",d:"The payment notice is checked, the invoice is found, and Status, Paid On date and Payment Reference are filled in."},
+ {s:"live",a:"Stripe",t:"Stripe Checkout link per fee",d:"A new fee sends the parent a secure Stripe checkout link on WhatsApp and SMS. A test-card payment went through end to end."},
+ {s:"live",a:"Stripe",t:"Invoice marked Paid automatically",d:"Stripe's payment webhook is checked, the invoice is found, and Status, Paid On date and Payment Reference are filled in."},
  {s:"live",a:"Fees",t:"7-day due reminder",d:"Every morning at 9:00 it finds fees due within 7 days, makes a fresh pay link, messages the parent and marks the reminder sent."},
- {s:"live",a:"CRM",t:"School data model",d:"12 linked modules: Admission Enquiries, Guardians, Students, Classes, Attendance, Fees, Results, Student Concerns, Meetings, Notices, Parent Requests and Fee Reminders."},
+ {s:"live",a:"CRM",t:"School data model",d:"13 linked modules: Admission Enquiries, Guardians, Students, Classes, Attendance, Fees, Results, Student Concerns, Meetings, Notices, Parent Requests, Fee Reminders and Classroom Assignments."},
  {s:"live",a:"Access",t:"Roles, layouts and saved views",d:"8 roles with All / Group / Own access, field locks, role layouts and 25 saved views."},
  {s:"live",a:"AI agents",t:"Five AI agents",d:"SchoolLine Assistant, WhatsApp Chat Agent, Admissions Voice Agent, Fee Reminder Agent and the Message Reader."},
  {s:"live",a:"Dashboards",t:"Six school dashboards",d:"Morning Safety Board, Admissions Funnel, Parent Communication, Fees, Staff Load and Student Wellbeing, shared by role."},
@@ -567,7 +650,10 @@ var ITEMS = [
  {s:"testing",a:"Admissions",t:"Offer letter and payment ladder",d:"Offer on WhatsApp, reminders and a call until paid, and the payment webhook moves the enquiry to Payment confirmed."},
  {s:"testing",a:"Fees",t:"2-day due reminder",d:"The second reminder is saved and runs when a fee is two days from its due date."},
  {s:"testing",a:"Fees",t:"Fee reminder call campaigns",d:"An AI voice campaign and a live-agent campaign with retries."},
- {s:"testing",a:"Safe arrival",t:"Gate check-in",d:"A gate scan updates the morning record and sends \"checked in at 8:18 AM\" to the parent."},
+ {s:"live",a:"Attendance",t:"Gate QR attendance tracker",d:"A gate scan applies the class cutoff in Sri Lanka time, creates or closes today's record and sends \"checked in at 7:12 AM\" to the parent."},
+ {s:"live",a:"Google Classroom",t:"Classroom sync",d:"One record per student per assignment, with submission status, pushed in through the Classroom Sync webhook."},
+ {s:"live",a:"Google Classroom",t:"Homework due-date reminders",d:"8:00 daily: work not submitted 3 days before the due date, and on the day, goes to the guardian on WhatsApp and SMS. Tested on the finale environment."},
+ {s:"testing",a:"Google Classroom",t:"Quiz scores to Results",d:"Every 15 minutes, Google Forms quiz responses are matched to students by email and saved as results, never twice."},
  {s:"testing",a:"Safe arrival",t:"Arrival check and reply reader",d:"Creates Not arrived records, messages the parent, and AI reads replies like \"2, bus broke down\" in three languages."},
  {s:"testing",a:"Progress",t:"Results summary and teacher concerns",d:"Imported marks become a personal summary (\"Maths up 14 marks to 78\"). A teacher concern sends a gentle note to the parent."},
  {s:"build",a:"Admissions",t:"Documents on WhatsApp",d:"Photos and PDFs land on the right field of the enquiry, with a reply listing what is still missing."},
@@ -575,7 +661,7 @@ var ITEMS = [
  {s:"build",a:"Principal",t:"Principal's AI assistant",d:"The principal asks questions of live data through the Uniconnect MCP server."},
  {s:"build",a:"Everyday",t:"Notices in three languages and Friday digest",d:"Staff write once in English; AI translates for review; each parent gets their language."},
  {s:"roadmap",a:"Integrations",t:"Facebook lead capture",d:"Ad leads flow into the CRM automatically. Built in code, ships in a later release."},
- {s:"roadmap",a:"Integrations",t:"LMS and biometric devices",d:"Homework and grade alerts from Moodle or Google Classroom, and RFID gate devices."}
+ {s:"roadmap",a:"Integrations",t:"Moodle and biometric devices",d:"The same pattern for Moodle, and RFID or biometric gate readers posting to the attendance webhook."}
 ];
 var cur = "all";
 function renderStatus(){
@@ -616,10 +702,10 @@ var SCENES = [
   behind:[["Enrolment workflow","live"],["Linked guardian, student and fee records","live"]]},
  {t:"7:30",n:"A late morning",kind:"Live · 1 min 45 s",title:"The parent checks, the school handles it",
   see:["7:30 cutoff. Dinithi has not scanned in. Kumari gets a check message: 1 absent, 2 late, 3 call me.","She replies <em>\"2, the bus broke down near Gampola.\"</em> The record shows Running late, expected 8:20.","At 8:05 she asks <em>\"Has she reached yet?\"</em> The assistant reads today's record and answers.","At 8:18 the QR scan at the gate sends \"checked in at 8:18 AM\" and the safety board turns green.","A second phone plays another parent: no reply, AI call, unsure, transfer to the duty teacher."],
-  behind:[["Gate check-in webhook","testing"],["Arrival check and reply reader","testing"],["AI call and duty-teacher transfer","build"],["SMS fallback if WhatsApp fails","build"]]},
+  behind:[["Gate QR attendance tracker","live"],["Arrival check and reply reader","testing"],["AI call and duty-teacher transfer","build"],["SMS fallback if WhatsApp fails","build"]]},
  {t:"9:15",n:"Through the term",kind:"Live · quick cuts",title:"Fees, marks and teacher concerns",
-  see:["Term 2 fee reminder arrives with a pay link.","Results are imported. Kumari gets <em>\"Maths up 14 marks to 78. English: reading needs practice.\"</em>","A teacher logs a concern. A gentle message goes to the parents and a phone parent-teacher meeting is booked."],
-  behind:[["Fee reminders and pay links","live"],["Results summary and concern note","testing"],["Phone meeting by conference call","build"]]},
+  see:["Term 2 fee reminder arrives with a pay link.","A Google Classroom assignment is due in 3 days and not submitted. Kumari gets a reminder on WhatsApp and SMS.","Results are imported. Kumari gets <em>\"Maths up 14 marks to 78. English: reading needs practice.\"</em>","A teacher logs a concern. A gentle message goes to the parents and a phone parent-teacher meeting is booked."],
+  behind:[["Fee reminders and Stripe links","live"],["Google Classroom sync and reminders","live"],["Results summary and concern note","testing"],["Phone meeting by conference call","build"]]},
  {t:"10:00",n:"Principal + close",kind:"Live then video · 1 min",title:"The principal's view, and the closing video",
   see:["Admissions funnel, morning safety board, communications, fees and staff load, live.","The principal asks an AI assistant: <em>\"Which Grade 6 students were late 3 times this month?\"</em>","Closing video: the same kitchen, now calm. Sunil reads Friday's digest: <em>\"Arrived on time all week.\"</em>"],
   behind:[["Six dashboards","live"],["Principal's AI assistant (MCP)","build"]]}
@@ -668,7 +754,7 @@ var MODULES = [
   ["Admission No","Auto-number","Unique. Printed as the QR code on the ID card"],["Full name","Text","Required"],["Date of birth","Date",""],["Gender","Choice",""],
   ["Grade","Choice","Drives the Class dropdown"],["Class","Link → Classes",""],["Primary guardian","Link → Guardians","Receives all alerts"],["All guardians","Link → Guardians","Many-to-many"],
   ["Status","Choice","Active · Left · Suspended"],["Admission date","Date",""],["How she travels","Choice","Information only. The school does not provide transport"],
-  ["Photo","File","From the enquiry"],["Health note","Rich text","Principal, class teacher and counsellor only"],["Late / absent (30 days)","Number","Updated weekly"],
+  ["Google email","Email","Matches Google Classroom and Forms quiz responses"],["Photo","File","From the enquiry"],["Health note","Rich text","Principal, class teacher and counsellor only"],["Late / absent (30 days)","Number","Updated weekly"],
   ["Open concerns","Number",""],["From enquiry","Link → Enquiries","One-to-one"]]},
  {n:"Classes",d:"Class teacher, check-in cutoff and capacity. Enrolment uses capacity to place a new student.",f:[
   ["Class code","Text","Unique, e.g. 6B-2027"],["Grade","Choice",""],["Section","Choice","A · B · C"],["Year","Number",""],
@@ -709,7 +795,11 @@ var MODULES = [
   ["Category","Choice","Admissions · Fees · Attendance · Results · Safety · Other"],["Priority","Choice","Normal · High (High = safety)"],["Question","Rich text",""],
   ["AI summary","Rich text","From the chat or call"],["Status","Choice","New · In progress · Waiting for parent · Resolved"],
   ["Reply by","Date-time","High = 15 min, Normal = 4 h"],["Resolution","Rich text",""]]},
- {n:"Fee Reminders",d:"One row per reminder call. Feeds the AI voice and live-agent fee campaigns, with retries.",f:[]}
+ {n:"Fee Reminders",d:"One row per reminder call. Feeds the AI voice and live-agent fee campaigns, with retries.",f:[]},
+ {n:"Classroom Assignments",d:"One record per student per Google Classroom assignment, used to remind guardians before the due date.",f:[
+  ["Student","Link → Students","Matched or created by the sync"],["Student email","Email","Google account"],["Course","Text","Google Classroom course"],
+  ["Assignment","Text","Assignment title"],["Assignment key","Text","Course + coursework id, so a sync never duplicates"],["Due date","Date","Drives the 3-day and due-day reminders"],
+  ["Submission status","Text","Turned in or not, from Classroom"],["Guardian phone","Phone","Where reminders go"]]}
 ];
 document.getElementById("mods").innerHTML = MODULES.map(function(m,i){
   var body = m.f.length
@@ -782,15 +872,15 @@ var WF = [
  {id:"WF-03",j:"Admissions",p:1,n:"Document intake",trg:"Router branch: file from an open enquiry",s:["Message Reader identifies the document from its caption and file name.","Save it to the matching file field; set documents to Partial or Complete.","Partial: \"Received X of 4. Still needed: …\". Complete: stage Docs complete, officer notified."]},
  {id:"WF-04",j:"Admissions",p:1,n:"Offer letter",trg:"Enquiry stage changes to Offer sent",s:["Send the offer letter and invoice on WhatsApp and email.","Add to the Admission Payment Follow-up campaign.","Stage becomes Payment pending."]},
  {id:"WF-05",j:"Admissions",p:1,n:"Payment follow-up ladder",trg:"Daily at 10:00 (webhook for the demo)",s:["Find enquiries with Payment pending.","1st: WhatsApp reminder with a secure pay link. 2nd: another reminder. 3rd: AI reminder call. Then a task for the Admissions Officer."],o:"Stops by itself once the payment is confirmed."},
- {id:"WF-06",j:"Admissions",p:1,n:"Payment confirmation",trg:"Stripe payment notice (webhook), or a bank slip photo",s:["Card: find the invoice, mark it Paid with date and reference, set the enquiry to Payment confirmed.","Slip: save the photo, create a Fees request for Accounts, reply \"We received your slip\"."]},
+ {id:"WF-06",j:"Fees",p:1,n:"Stripe payment confirmation",trg:"Stripe payment webhook, or a bank slip photo",s:["Card: find the invoice, mark it Paid with date and reference, set the enquiry to Payment confirmed.","Slip: save the photo, create a Fees request for Accounts, reply \"We received your slip\"."]},
  {id:"WF-07",j:"Admissions",p:1,n:"Enrolment",trg:"Enquiry stage changes to Payment confirmed",s:["Find the guardian by mobile, or create one.","Match or create the student in the class with the most free seats.","Raise the Term 1 fee, which sends its own pay link.","Set the enquiry to Enrolled and send the welcome message."]},
- {id:"WF-08",j:"Safe arrival",p:1,n:"Gate check-in",trg:"gate-checkin webhook (QR scan), or an office tap",s:["Find the student and today's attendance record.","Update an open record to Late check-in and resolve the escalation, or create On time / Late check-in.","Send \"checked in at 8:18 AM\" in the guardian's language; tell the teachers if an escalation was open."]},
+ {id:"WF-08",j:"Safe arrival",p:1,n:"Gate QR attendance tracker",trg:"Attendance webhook (QR scan), or an office tap",s:["Find the student; apply the class cutoff in Sri Lanka time.","Update an open record to Late check-in and resolve the escalation, or create On time / Late check-in.","Send \"checked in at 8:18 AM\" in the guardian's language; tell the teachers if an escalation was open."]},
  {id:"WF-09",j:"Safe arrival",p:1,n:"Delivery proof and SMS fallback",trg:"Message delivered / delivery failed",s:["Find the attendance record by message ID.","Delivered → mark Delivered. Failed → send the SMS version and mark SMS fallback."]},
  {id:"WF-10",j:"Safe arrival",p:1,n:"Arrival check sweeps",trg:"School days at 7:30, 7:45 and 8:00",s:["7:30: anyone without a record today gets Not arrived and the 1 / 2 / 3 check message.","7:45: no reply → added to the Safe Arrival Check AI call campaign.","8:00: still unknown → high-priority Safety request and a call from the duty teacher's extension."],o:"Separate short sweeps instead of long waits inside a loop."},
  {id:"WF-11",j:"Safe arrival",p:1,n:"Parent reply to the check",trg:"Router branch: guardian with an open Not-arrived record",s:["Message Reader returns intent, reason and expected time.","Absent → Absent (informed). Late → Running late with expected time. Call me → high-priority request and a call.","Reply: \"Thank you. We've told her teacher. We'll message you when she checks in.\""]},
  {id:"WF-11b",j:"Safe arrival",p:2,n:"Parent informs first",trg:"Router branch: guardian says absent or late, no alert yet",s:["Create today's record as Absent (informed) or Running late.","Tell the class teacher. The 7:30 sweep skips this child."]},
  {id:"WF-12",j:"Safe arrival",p:1,n:"Safe-arrival call outcome",trg:"Call ended for the Safe Arrival Check campaign",s:["AI reads the call summary for reason and expected time.","Update the attendance record. Transferred or no answer → left for the 8:00 sweep."]},
- {id:"WF-13",j:"Fees",p:2,n:"Fee reminders",trg:"Daily at 9:00",s:["Fees due in 7 days, then 2 days: make a fresh pay link and send it on WhatsApp and SMS.","Mark each reminder sent.","Overdue → Fee Reminder call campaign, AI first, then a live agent."]},
+ {id:"WF-13",j:"Fees",p:1,n:"Fee reminders with fresh Stripe links",trg:"Daily at 9:00",s:["Fees due in 7 days, then 2 days: make a fresh pay link and send it on WhatsApp and SMS.","Mark each reminder sent.","Overdue → Fee Reminder call campaign, AI first, then a live agent."]},
  {id:"WF-14",j:"Fees",p:2,n:"Fee receipt",trg:"Fee status changes to Paid",s:["Send the receipt on WhatsApp and email."]},
  {id:"WF-15",j:"Progress",p:2,n:"Personal results summary",trg:"release-results webhook after the marks import",s:["For each student, read this exam's results.","AI writes a three-line summary in the guardian's language: biggest improvement, one area to work on.","Save it and send results_ready."]},
  {id:"WF-16",j:"Progress",p:2,n:"Teacher concern → parent → meeting",trg:"Student Concern created",s:["AI drafts a gentle message in the guardian's language.","Send it with \"Reply 1 to book a phone meeting\".","Reply 1 → create a phone meeting and send the invite."]},
@@ -798,6 +888,9 @@ var WF = [
  {id:"WF-18",j:"Everyday",p:2,n:"Notices in three languages",trg:"Notice status changes to Translate, then Ready",s:["AI translates the English notice into Sinhala and Tamil.","Office reviews and sets Ready.","Each guardian in the audience gets the notice in their language."]},
  {id:"WF-19",j:"Everyday",p:3,n:"Friday digest",trg:"Fridays at 15:30",s:["For each student: this week's attendance, fees due, next week's events.","AI writes one short message; send weekly_digest."]},
  {id:"WF-20",j:"Everyday",p:3,n:"Attendance early warning",trg:"Mondays at 9:00",s:["Count late and absent days in the last 14 days.","3 or more → a Concern for the counsellor and a call in Counsellor Outreach."]},
+ {id:"WF-22",j:"Classroom",p:1,n:"Google Classroom sync",trg:"Classroom Sync webhook, one post per student per assignment",s:["Find the student, or add them.","Create or update the Classroom Assignment with course, title, due date and submission status."]},
+ {id:"WF-23",j:"Classroom",p:1,n:"Homework due-date reminders",trg:"Daily at 8:00 (two workflows: 3 days before, and due today)",s:["Find assignments due on that date that are not turned in.","Send the guardian a WhatsApp message and an SMS naming the child, assignment, course and due date."],o:"Tested on the finale environment on 17 Nov."},
+ {id:"WF-24",j:"Classroom",p:2,n:"Quiz scores to Results",trg:"Every 15 minutes",s:["List the course's coursework through the Classroom API and pick out the quizzes.","Read each quiz's responses through the Forms API.","Match the student by Google email; save the score as a result if it is not saved yet."]},
  {id:"WF-21",j:"Everyday",p:1,n:"Hand-off to staff",trg:"AI transfer or chat escalation",s:["Create a Parent Request with channel, category, question, AI summary, priority and reply-by time.","Every 15 minutes: requests past 80% of their time → remind the group."]}
 ];
 var wfj = "All";
@@ -854,15 +947,17 @@ var QA = [
  {c:"AI and safety",q:"Can the AI give a wrong fee or date?",a:["Answers come from information the school approves, not from the model's memory. Money changes are made by the CRM and workflows, never by the AI's own words. Our fee figures in the demo are samples and are labelled that way."]},
  {c:"AI and safety",q:"How do you protect children's data?",a:["Access is set by role at three levels: All, Group or Own. Sensitive fields such as health notes and payment details are locked to named roles. The assistant recognises a parent by their mobile and answers only about their own child. Parents opt in to WhatsApp, and promotion opt-outs never block safety or fee messages."]},
  {c:"AI and safety",q:"Does it work in Sinhala and Tamil?",a:["Message templates are prepared in three languages and the reply reader is built for Sinhala, Tamil and mixed-script messages. Sinhala voice quality is tested before use; if it is not good enough, Sinhala-speaking parents get the recorded IVR plus a WhatsApp text in Sinhala."]},
- {c:"Demo",q:"What in the demo is real, and what is simulated?",a:["Real: WhatsApp messages, calls, CRM records, AI agents, workflows, dashboards, and Stripe payments in test mode. Simulated: the gate scan comes from a QR form posting to a webhook, not a hardware device, and timed sweeps are fired on cue. Roadmap: LMS sync, biometric devices, and automatic Facebook lead capture."]},
+ {c:"Demo",q:"What in the demo is real, and what is simulated?",a:["Real: WhatsApp messages, calls, CRM records, AI agents, workflows, dashboards, Google Classroom sync and reminders, and Stripe payments in test mode. Simulated: the gate scan comes from a QR form posting to a webhook, not a hardware device, and timed sweeps are fired on cue. Roadmap: Moodle, biometric devices, and automatic Facebook lead capture."]},
  {c:"Demo",q:"Why does the payment use a test card?",a:["Stripe test mode proves the full flow without moving real money: link, checkout, notice, invoice marked Paid. Going live means switching to the school's own Stripe account and keys."]},
  {c:"Business",q:"Who pays, and how much?",a:["The school pays a monthly subscription based on student count, plus message and call costs at cost, and a one-time setup fee for importing data. Prices are not set yet. The pilot will tell us what schools value."]},
  {c:"Business",q:"How long does it take to onboard a school?",a:["Data goes in by CSV in a fixed order: classes, guardians, students, fees, results. Then channels (WhatsApp number, SMS sender, phone system) and the school's approved documents are connected. Our finale plan builds the full setup from a clean install in about seven hours."]},
  {c:"Business",q:"How is this different from a school ERP?",a:["An ERP stores records and expects parents to log in. SchoolLine reaches parents on WhatsApp and the phone, answers them, and acts: it reminds, calls, escalates and updates the record. It can sit beside an existing system through the API."]},
  {c:"Business",q:"What do you measure to prove it works?",a:["Time from gate scan to parent message (target under 30 seconds), share of after-hours enquiries handled by AI, arrival cases resolved before 8:15, office calls avoided, and fees paid within the reminder window."]},
  {c:"Technical",q:"What are the limits of WhatsApp messaging?",a:["Outside a 24-hour window after the parent last wrote, WhatsApp requires an approved template. Reminders and notices use templates, and an SMS fallback covers failed deliveries. One weekly digest also cuts message volume."]},
- {c:"Technical",q:"What did you build beyond the brief?",a:["Card payments with automatic invoice updates, a reminder ladder (link on creation, 7 days before, 2 days before) with WhatsApp, SMS and call campaigns, an AI reader that turns free-text replies into structured records, and a Facebook lead capture integration for the next release."]},
- {c:"Technical",q:"What comes after the hackathon?",a:["Run a pilot at one school, replace sample data with approved figures, move payments to live keys, connect an LMS, and add hardware gate devices."]}
+ {c:"Technical",q:"What did you build beyond the brief?",a:["A Google Classroom integration that reminds parents about unsubmitted homework and saves quiz scores, Stripe card payments with automatic invoice updates, a reminder ladder (link on creation, 7 days before, 2 days before) with WhatsApp, SMS and call campaigns, an AI reader that turns free-text replies into structured records, and a Facebook lead capture integration for the next release."]},
+ {c:"Technical",q:"How does the Google Classroom integration work?",a:["Each assignment is synced into SchoolLine as one record per student, with its due date and whether it was turned in. At 8:00 every morning, guardians of students who have not submitted get a WhatsApp message and an SMS, 3 days before the due date and on the day. Quiz scores from Google Forms are read every 15 minutes and saved in Results, matched to the student by Google email."]},
+ {c:"Technical",q:"Is the Stripe payment secure?",a:["The parent pays on Stripe's own hosted Checkout page, so card details never reach SchoolLine. Each link carries the invoice number as its reference, and only Stripe's payment notice can mark an invoice Paid. The demo uses Stripe test mode; going live means switching to the school's own Stripe account."]},
+ {c:"Technical",q:"What comes after the hackathon?",a:["Run a pilot at one school, replace sample data with approved figures, move payments to live keys, add Moodle alongside Google Classroom, and add hardware gate devices."]}
 ];
 var qcur = "All";
 function renderQA(){
